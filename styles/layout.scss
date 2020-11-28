@@ -1,4 +1,15 @@
 // See: https://sass-lang.com/
+nav {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: goldenrod;
+  padding: 1.5em;
+  h3 {
+    margin-left: 1em;
+  }
+}
 
 body {
   background-color: #EEE;
@@ -6,4 +17,20 @@ body {
   h1 {
     color: #244751;
   }
+  main{
+    display: flex;
+    margin-top: 6px;
+    background-color: #f4f1ec;
+
+    #map {
+      height: 700px;
+      width: 700px;
+      margin-left: 0px;
+      justify-content: flex-end;
+    }
+  }
+
+
+
 }
+

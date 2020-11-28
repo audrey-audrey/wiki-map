@@ -3,37 +3,56 @@
   <head>
     <title>Home Page</title>
 
-    <link rel="stylesheet" href="../public/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="../public/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="../public/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <script type="text/javascript" src="../public/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="../public/scripts/app.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0AN2t3C75q5u3gGpGna7bu_yt_zyelPM&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
     <script>
     let map;
     function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+      const myLatLng = { lat: -26.363, lng: 121.044 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: myLatLng,
+      });
+      new google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "Hello World!",
       });
     }
     </script>
 
     <style>
-      #map {
-        height: 500px;
-        width: 500px;
-      }
+
     </style>
+
+
+    <header>
+      <nav>
+        <h3>App Name</h3>
+        <div class = 'reglogin-btn'>
+        <a href = "/register" class="btn btn-primary"> Register </a>
+        <a href = "/login" class="btn btn-primary" style = "margin-left: 10px"> Login </a>
+        </div>
+      </nav>
+    </header>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <!-- Page-specific (main) content here -->
+    <main class="container">
     <div id="map" ></div>
+    </main>
   </body>
 </html>
