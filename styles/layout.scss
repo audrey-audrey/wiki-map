@@ -34,13 +34,12 @@ body {
 
   main{
     display: flex;
-    margin-top: 6px;
+    margin-top: 12px;
     background-color: #f4f1ec;
 
-    .container{
-      margin: 0px;
-      display: flex;
-      flex-direction: column;
+    #map {
+      height: 500px;
+      width: 500px;
     }
 
     .mapFooter{
@@ -48,12 +47,39 @@ body {
       margin-top: 0.5em;
       justify-content: space-between;
     }
+  }
 
-    #map {
-      height: 500px;
-      width: 500px;
+  .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .pinDescription{
+      display: flex;
+      flex-direction: column;
+      width: 400px;
     }
 
+    #title{
+      margin-bottom: 20px;
+      padding: 0.3em;
+    }
+
+    #description{
+      margin-bottom: 20px;
+      height: 200px;
+      resize: none;
+      padding: 0.3em;
+    }
+
+    #image{
+      padding: 0.3em;
+    }
+
+    .btn-success{
+      width: 130px;
+      margin-top: 30px;
+    }
   }
 
 
