@@ -6,9 +6,16 @@ nav {
   justify-content: space-between;
   background-color: rgb(223, 174, 49);
   padding: 1.5em;
+
   h3 {
     margin-left: 1em;
+    font-size: 25px;
   }
+
+  .homelink:hover{
+    text-decoration: none;
+  }
+
 }
 
 body {
@@ -17,6 +24,11 @@ body {
   h1 {
     color: #244751;
   }
+
+  .loginbody {
+    padding: 2.5em;
+  }
+
   main{
     display: flex;
     margin-top: 6px;
