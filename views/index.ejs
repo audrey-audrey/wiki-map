@@ -4,17 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%- include('partials/_header') %>
+    <!-- Font CSS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
     <title> Midterm App </title>
+
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- App JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!-- External JS -->
+    <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
       defer>
@@ -23,9 +31,9 @@
     <script>
     let map;
     function initMap() {
-      const myLatLng = { lat: -26.363, lng: 121.044 };
+      const myLatLng = { lat: 43.6532, lng: -79.3832 };
       const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
+        zoom: 10,
         center: myLatLng,
       });
       new google.maps.Marker({
@@ -40,7 +48,23 @@
   <body>
     <!-- Page-specific (main) content here -->
     <main class="container">
-    <div id="map" ></div>
+      <article class = "mapContainer">
+        <header class = "mapHeader">
+          <div class = "userInfo">
+          <h4 class = "mapTitle"> Best Places to Eat in Toronto </h4>
+          </div>
+          <h5 class = "userID"> </h5>
+        </header>
+        <div id="map" ></div>
+        <footer class = "mapFooter">
+          <h6 class = "footerDate">  days ago</h6>
+          <div class = "footerFeeatures">
+            <a href = "/register" class="btn btn-primary"> Edit </a>
+            <a href = "/register" class="btn btn-primary"> <i class="fas fa-star"></i> </a>
+          </div>
+        </footer>
+      </article>
+
     </main>
   </body>
 </html>

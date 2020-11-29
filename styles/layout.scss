@@ -18,7 +18,6 @@ nav {
 
   .reglogin-btn{
     margin-right: 1em;
-
   }
 }
 
@@ -38,11 +37,15 @@ body {
     margin-top: 6px;
     background-color: #f4f1ec;
 
+    .container{
+      margin: 0px;
+      display: flex;
+      flex-direction: column;
+    }
+
     #map {
-      height: 700px;
-      width: 700px;
-      margin-left: 0px;
-      justify-content: flex-end;
+      height: 500px;
+      width: 500px;
     }
   }
 
