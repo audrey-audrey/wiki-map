@@ -18,7 +18,6 @@ nav {
 
   .reglogin-btn{
     margin-right: 1em;
-
   }
 }
 
@@ -38,12 +37,23 @@ body {
     margin-top: 6px;
     background-color: #f4f1ec;
 
-    #map {
-      height: 700px;
-      width: 700px;
-      margin-left: 0px;
-      justify-content: flex-end;
+    .container{
+      margin: 0px;
+      display: flex;
+      flex-direction: column;
     }
+
+    .mapFooter{
+      display: flex;
+      margin-top: 0.5em;
+      justify-content: space-between;
+    }
+
+    #map {
+      height: 500px;
+      width: 500px;
+    }
+
   }
 
 
