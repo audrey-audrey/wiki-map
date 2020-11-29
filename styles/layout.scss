@@ -43,6 +43,12 @@ body {
       flex-direction: column;
     }
 
+    .mapFooter{
+      display: flex;
+      margin-top: 0.5em;
+      justify-content: space-between;
+    }
+
     #map {
       height: 500px;
       width: 500px;
