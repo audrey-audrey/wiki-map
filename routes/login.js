@@ -8,6 +8,5 @@ module.exports = (db) => {
     };
     res.render("login", templateVars)
   });
-
   return router;
 };
