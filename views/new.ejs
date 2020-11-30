@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%- include('partials/_header') %>
+    <!-- Font CSS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
+    <title> Midterm App </title>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!-- External JS -->
+    <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
+    <script src = "../public/scripts/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk0Vt8Gzf1zGq2st6ux91HTeIQ4GIvl28&libraries=places&callback=initMap"
+    async defer></script>
+    <script>
+
+    let map;
+    let markers = [{coords:{lat: 43.7169, lng: -79.3389},
+                  iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                  content: '<h1>Pop-up example</h1>'},
+                  {coords:{lat: 43.6424, lng: -79.3860}}];
+    let searchMarker = [];
+
+    function initMap() {
+      // map options
+      const options = {
+        zoom: 14,
+        center: { lat: 43.6532, lng: -79.3832 }
+      }
+
+      // new map
+      const map = new google.maps.Map(document.getElementById("map"), options);
+
+      const input = document.getElementById('pac-input');
+      const autocomplete = new google.maps.places.Autocomplete(input);
+
+      // Specify just the place data fields that you need.
+      autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address']);
+
+      let geocoder = new google.maps.Geocoder;
+      autocomplete.addListener('place_changed', function() {
+        // Clear out the old markers.
+        searchMarker.forEach((marker) => {
+          marker.setMap(null);
+        });
+        searchMarker = [];
+
+        let place = autocomplete.getPlace();
+        let marker = new google.maps.Marker({map: map});
+        if (!place.place_id) {
+          return;
+        }
+        geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+          if (status !== 'OK') {
+            window.alert('Geocoder failed due to: ' + status);
+            return;
+          }
+
+          map.setZoom(17);
+          map.setCenter(results[0].geometry.location);
+
+          // Set the position of the marker using the place ID and location.
+          marker.setPlace(
+              {placeId: place.place_id, location: results[0].geometry.location});
+
+          marker.setVisible(true);
+
+          searchMarker.push(marker);
+          });
+        });
+
+        // listen for click on map
+        google.maps.event.addListener(map, 'dblclick',
+        function(event){
+          //Add marker
+          addMarker({coords:event.latLng})
+        })
+
+        const addMarker = function(props) {
+          // add marker
+          const marker = new google.maps.Marker({
+            position: props.coords,
+            map: map,
+            // icon: props.iconImage
+          })
+          // check for customization
+          if (props.iconImage) {
+            marker.setIcon(props.iconImage)
+          }
+          // check content
+          if (props.content) {
+            // info pop-up window
+            const infoWindow = new google.maps.InfoWindow({
+              content: props.content
+            })
+            // event listener for info window NOT working?
+            marker.addListener('click', function () {
+              infoWindow.open(map, marker);
+            })
+          }
+        }
+
+        // loop through markers
+        for(let i=0; i<markers.length;i++) {
+          addMarker(markers[i])
+        }
+        // addMarker({coords:{lat: 43.7169, lng: -79.3389},
+        //           iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        //           content: '<h1>Pop-up example</h1>'});
+        // addMarker({coords:{lat: 43.6424, lng: -79.3860}});
+
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <article class = "mapContainer">
+        <div id = "map" ></div>
+      </article>
+      <form class = "pinDescription">
+        <input id="pac-input" class="controls"  placeholder="Search Box">
+        <input name = "title" id = "title" placeholder = "Title" />
+        <textarea name = "text" id = "description" placeholder = "Description"></textarea>
+        <input name = "image" id = "image" placeholder = "image url" />
+        <a class="btn btn-success"> Add Point </a>
+        <a class="btn btn-success"> Create Map! </a>
+      </form>
+
+    </main>
+  </body>
+</html>
