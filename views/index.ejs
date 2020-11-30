@@ -23,67 +23,12 @@
 
     <!-- External JS -->
     <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
-    <script src = "../public/scripts/map.js"></script>
+    <script src = "/scripts/map.js"></script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
     defer>
     </script>
-    <script>
 
-      let map;
-
-      function initMap() {
-        // map options
-        const options = {
-          zoom: 14,
-          center: { lat: 43.6532, lng: -79.3832 }
-        }
-        // new map
-        const map = new google.maps.Map(document.getElementById("map"), options);
-        // listen for click on map
-        google.maps.event.addListener(map, 'dblclick',
-        function(event){
-          //Add marker
-          addMarker({coords:event.latLng})
-        })
-        const addMarker = function(props) {
-          // add marker
-          const marker = new google.maps.Marker({
-            position: props.coords,
-            map: map,
-            // icon: props.iconImage
-          })
-          // check for customization
-          if (props.iconImage) {
-            marker.setIcon(props.iconImage)
-          }
-          // check content
-          if (props.content) {
-            // info pop-up window
-            const infoWindow = new google.maps.InfoWindow({
-              content: props.content
-            })
-            // event listener for info window NOT working?
-            marker.addListener('click', function () {
-              infoWindow.open(map, marker);
-            })
-          }
-        }
-        let markers = [{coords:{lat: 43.7169, lng: -79.3389},
-                  iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                  content: '<h1>Pop-up example</h1>'},
-                  {coords:{lat: 43.6424, lng: -79.3860}}]
-        // loop through markers
-        for(let i=0; i<markers.length;i++) {
-          addMarker(markers[i])
-        }
-        // addMarker({coords:{lat: 43.7169, lng: -79.3389},
-        //           iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-        //           content: '<h1>Pop-up example</h1>'});
-        // addMarker({coords:{lat: 43.6424, lng: -79.3860}});
-      }
-
-    </script>
   </head>
 
   <body>
