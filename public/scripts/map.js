@@ -1,4 +1,3 @@
-let map;
 let markers = [{coords:{lat: 43.7169, lng: -79.3389},
               iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
               content: '<h1>Pop-up example</h1>'},
@@ -17,11 +16,12 @@ function initMap() {
 
   // loop through markers
   for(let i = 0; i < markers.length; i++) {
-    new google.maps.Marker({
+    var temp = new google.maps.Marker({
       position: markers[i].coords,
       icon: markers[i].iconImage,
-      map,
+      map: map,
     });
+    console.log(temp);
   }
 
   const input = document.getElementById('pac-input');
@@ -31,6 +31,8 @@ function initMap() {
   autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address']);
 
   let geocoder = new google.maps.Geocoder;
+  let coordsArray = [];
+
   autocomplete.addListener('place_changed', function() {
     // Clear out the old markers.
     // searchMarker.forEach((marker) => {
@@ -39,6 +41,9 @@ function initMap() {
     // searchMarker = [];
 
     let place = autocomplete.getPlace();
+    coordsArray.push(place.geometry.location.lat());
+    coordsArray.push(place.geometry.location.lng());
+
     let marker = new google.maps.Marker({map: map});
     if (!place.place_id) {
       return;
@@ -69,24 +74,32 @@ function initMap() {
 
     });
 
+    $(()=> {
+      $("#addPoint").click( ()=> {
+        console.log('addpoint button clicked')
+        addMarker({
+          coords: {lat: coordsArray[0], lng: coordsArray[1]},
+          iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+          content: "HELLO"
+        }, map);
+      })
+    })
+
   }
 
   // Adds a marker to the map and push to the array.
-  function addMarker(location) {
-    const marker = new google.maps.Marker({
-      position: location,
+  function addMarker(location, map) {
+    console.log(location)
+    var marker = new google.maps.Marker({
+      position: location.coords,
+      icon: location.iconImage,
       map: map,
     });
+    console.log(map);
+    console.log(markers);
     markers.push(marker);
+    console.log(markers);
   }
 
-  $(()=> {
-    $("#addPoint").click( ()=> {
-      addMarker({
-        coords: {lat: 43.8169, lng: -79.7389},
-        iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-        content: "HELLO"
-      });
-    })
-  })
+
 
