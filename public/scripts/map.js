@@ -87,6 +87,7 @@ function initMap() {
 
     });
 
+    // Adding pins to map
     $(()=> {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
@@ -95,11 +96,17 @@ function initMap() {
           content: '<h4>'+ $("#title").val() + '</h4>' +
                    '<p>' + $("#description").val() + '</p>' +
                    `<p id = "markerImage"> <img src = ${$("#image").val()} ></p>`,
-
         }, map);
         coordsArray = [];
       })
+      // Sending map and markers array to the database
+
+      $("#createMap").click( ()=> {
+        console.log('markers array',markers)
+
+      })
     })
+
 
   }
 

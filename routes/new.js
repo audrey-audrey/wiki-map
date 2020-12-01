@@ -8,5 +8,13 @@ module.exports = (db) => {
     };
     res.render("new", templateVars)
   });
+
+
+  router.post("/", (req, res) => {
+  // const userId = req.session.userId =??? using default id for now
+    // db.addMap???
+    // res.send('info')
+  });
+
   return router;
 };
