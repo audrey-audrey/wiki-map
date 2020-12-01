@@ -104,7 +104,11 @@ function initMap() {
           <td> ${$("#title").val()} </td>
           <td> ${$("#description").val()} </td>
         </tr>
-        `)
+        `);
+        $("#pac-input").val("");
+        $("#title").val("");
+        $("#description").val("");
+        $("#image").val("");
       })
     })
 
