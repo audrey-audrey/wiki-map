@@ -14,13 +14,13 @@ module.exports = (db) => {
     console.log(req.body)
     const queries = [];
 
-    for(const point of req.body.markers) {
+    for(const point of req.body.pins) {
        const queryString = `
-    INSERT INTO pins (content, coords, map_id, user_id)
-    VALUES ($1, $2, 1, 1)`
+    INSERT INTO pins (name, description, lat, lng, image, map_id, user_id)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
     // testing
-    const values = [point.content, JSON.stringify(point.coords)]
+    const values = [point]
 
     const query = db.query(queryString, values)
 

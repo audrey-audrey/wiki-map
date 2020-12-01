@@ -111,18 +111,17 @@ function initMap() {
         $("#description").val("");
         $("#image").val("");
       })
-      // Sending map and markers array to the database
 
+      // Sending map and markers array to the database
       $("#createMap").click(()=> {
         // console.log('markers array',markers)
         $.post("http://localhost:8080/new",
-        {markers: markers},
+        {pins: pins},
         function(data, status){
           console.log(data)
         });
       })
     })
-
 
   }
 
