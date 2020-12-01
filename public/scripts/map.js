@@ -92,9 +92,9 @@ function initMap() {
         console.log('addpoint button clicked')
         addMarker({
           coords: {lat: coordsArray[0], lng: coordsArray[1]},
-          content: '<h4>'+ $("#title").val() + '</h4>' +
-                   '<p>' + $("#description").val() + '</p>' +
-                   `<p id = "markerImage"> <img src = ${$("#image").val()} ></p>`,
+          content: '<h4>'+ escape($("#title").val()) + '</h4>' +
+                   '<p>' + escape($("#description").val()) + '</p>' +
+                   '<p id = "markerImage"> <img src = ' + escape($("#image").val()) +'></p>',
 
         }, map);
         coordsArray = [];
