@@ -6,6 +6,7 @@ let markers = [
                 }
               ];
 let searchMarker = [];
+let pins = [];
 
 
 function initMap() {
@@ -118,7 +119,7 @@ function initMap() {
         $.post("http://localhost:8080/new",
         {pins: pins},
         function(data, status){
-          console.log(data)
+          console.log('Sending data')
         });
       })
     })
@@ -137,9 +138,23 @@ function initMap() {
       map: map,
       animation: google.maps.Animation.DROP
     });
-    console.log(markers);
     markers.push(marker);
-    console.log(markers);
+    console.log('markers',markers);
+
+    // adding pins for database
+    const name = location.name;
+    const description = location.description;
+    const lat = location.lat;
+    const lng = location.lng;
+    const image = location.image;
+    const map_id = 1;
+    const user_id =1;
+
+    const pin = {name, description, lat, lng, image, map_id, user_id};
+
+    pins.push(pin);
+    console.log('pins', pins)
+
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.close(); // Close previously opened infowindow
       infowindow.setContent(

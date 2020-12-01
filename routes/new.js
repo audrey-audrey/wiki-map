@@ -14,13 +14,13 @@ module.exports = (db) => {
     console.log(req.body)
     const queries = [];
 
-    for(const point of req.body.pins) {
+    for(const pin of req.body.pins) {
        const queryString = `
     INSERT INTO pins (name, description, lat, lng, image, map_id, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
     // testing
-    const values = [point]
+    const values = [pin.name, pin.description, pin.lat, pin.lng, pin.image, pin.map_id, pin.user_id]
 
     const query = db.query(queryString, values)
 
