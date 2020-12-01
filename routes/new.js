@@ -9,11 +9,26 @@ module.exports = (db) => {
     res.render("new", templateVars)
   });
 
-
   router.post("/", (req, res) => {
-  // const userId = req.session.userId =??? using default id for now
-    // db.addMap???
-    // res.send('info')
+    // loops through markers array
+    console.log(req.body)
+    const queries = [];
+
+    for(const point of req.body.markers) {
+       const queryString = `
+    INSERT INTO pins (content, coords, map_id, user_id)
+    VALUES ($1, $2, 1, 1)`
+
+    // testing
+    const values = [point.content, JSON.stringify(point.coords)]
+
+    const query = db.query(queryString, values)
+
+    queries.push(query)
+    }
+
+    Promise.all(queries)
+    .then(()=> {res.send('All good!')})
   });
 
   return router;

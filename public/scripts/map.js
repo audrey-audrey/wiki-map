@@ -101,9 +101,13 @@ function initMap() {
       })
       // Sending map and markers array to the database
 
-      $("#createMap").click( ()=> {
-        console.log('markers array',markers)
-
+      $("#createMap").click(()=> {
+        // console.log('markers array',markers)
+        $.post("http://localhost:8080/new",
+        {markers: markers},
+        function(data, status){
+          console.log(data)
+        });
       })
     })
 
