@@ -34,11 +34,12 @@ function initMap() {
   let coordsArray = [];
 
   autocomplete.addListener('place_changed', function() {
-    // Clear out the old markers.
-    // searchMarker.forEach((marker) => {
-    //   marker.setMap(null);
-    // });
-    // searchMarker = [];
+    //Clear out the old markers.
+    searchMarker.forEach((marker) => {
+      marker.setMap(null);
+    });
+    searchMarker = [];
+    coordsArray = [];
 
     let place = autocomplete.getPlace();
     coordsArray.push(place.geometry.location.lat());
@@ -48,6 +49,7 @@ function initMap() {
     if (!place.place_id) {
       return;
     }
+
     geocoder.geocode({'placeId': place.place_id}, function(results, status) {
       if (status !== 'OK') {
         window.alert('Geocoder failed due to: ' + status);
@@ -77,15 +79,20 @@ function initMap() {
     $(()=> {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
+        console.log(markers);
         addMarker({
           coords: {lat: coordsArray[0], lng: coordsArray[1]},
           iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
           content: "HELLO"
         }, map);
+        coordsArray = [];
       })
     })
 
   }
+
+
+
 
   // Adds a marker to the map and push to the array.
   function addMarker(location, map) {
@@ -95,7 +102,6 @@ function initMap() {
       icon: location.iconImage,
       map: map,
     });
-    console.log(map);
     console.log(markers);
     markers.push(marker);
     console.log(markers);
