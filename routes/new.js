@@ -10,10 +10,22 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    // loops through markers array
-    console.log(req.body)
+    // empty queries array
     const queries = [];
 
+    console.log('req', req.body.mapInfo.name)
+
+    // // Inserting map data
+    const queryString = `
+    INSERT INTO maps (name)
+    VALUES ($1)`
+
+    const values = [req.body.mapInfo.name];
+
+    const query = db.query(queryString, values)
+    queries.push[query];
+
+    // Inserting pin data
     for(const pin of req.body.pins) {
        const queryString = `
     INSERT INTO pins (name, description, lat, lng, image, map_id, user_id)

@@ -6,7 +6,10 @@ let markers = [
                 }
               ];
 let searchMarker = [];
+
+// for database
 let pins = [];
+let mapInfo = {};
 
 
 function initMap() {
@@ -117,7 +120,8 @@ function initMap() {
       $("#createMap").click(()=> {
         // console.log('markers array',markers)
         $.post("http://localhost:8080/new",
-        {pins: pins},
+        {mapInfo: mapInfo,
+          pins: pins},
         function(data, status){
           console.log('Sending data')
         });
@@ -142,7 +146,6 @@ function initMap() {
     console.log('markers',markers);
 
     // adding pins for database
-    const mapTitle = location.mapTitle;
     const name = location.title;
     const description = location.description;
     const lat = location.lat;
@@ -151,7 +154,8 @@ function initMap() {
     const map_id = 1;
     const user_id =1;
 
-    const pin = {mapTitle, name, description, lat, lng, image, map_id, user_id};
+    mapInfo.name = location.mapTitle;
+    const pin = {name, description, lat, lng, image, map_id, user_id};
 
     pins.push(pin);
     console.log('pins', pins)
