@@ -92,12 +92,24 @@ function initMap() {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
         addMarker({
-          coords: {lat: coordsArray[0], lng: coordsArray[1]},
-          content: '<h4>'+ $("#title").val() + '</h4>' +
-                   '<p>' + $("#description").val() + '</p>' +
-                   `<p id = "markerImage"> <img src = ${$("#image").val()} ></p>`,
+          lat: coordsArray[0],
+          lng: coordsArray[1],
+          title: escape($("#title").val()),
+          description: escape($("#description").val()),
+          image: escape($("#image").val())
         }, map);
         coordsArray = [];
+        $(".table").append(`
+        <tr>
+          <th scope="row"> ${markers.length} </th>
+          <td> ${$("#title").val()} </td>
+          <td> ${$("#description").val()} </td>
+        </tr>
+        `);
+        $("#pac-input").val("");
+        $("#title").val("");
+        $("#description").val("");
+        $("#image").val("");
       })
       // Sending map and markers array to the database
 
@@ -119,8 +131,10 @@ function initMap() {
   function addMarker(location, map) {
     let infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: location.coords,
-      icon: location.iconImage,
+      position: {
+        lat: location.lat,
+        lng: location.lng
+      },
       map: map,
       animation: google.maps.Animation.DROP
     });
@@ -129,9 +143,19 @@ function initMap() {
     console.log(markers);
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.close(); // Close previously opened infowindow
-      infowindow.setContent(`${location.content}`);
+      infowindow.setContent(
+        '<h4>'+ location.title + '</h4>' +
+        '<p>' + location.description + '</p>' +
+        '<p id = "markerImage"> <img src = ' + location.image +'></p>',
+      );
       infowindow.open(map, marker);
     });
+  }
+
+  const escape = str => {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
 
 
