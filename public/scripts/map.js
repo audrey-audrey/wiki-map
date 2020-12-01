@@ -98,6 +98,13 @@ function initMap() {
 
         }, map);
         coordsArray = [];
+        $(".table").append(`
+        <tr>
+          <th scope="row"> ${markers.length} </th>
+          <td> ${$("#title").val()} </td>
+          <td> ${$("#description").val()} </td>
+        </tr>
+        `)
       })
     })
 
@@ -121,6 +128,12 @@ function initMap() {
       infowindow.setContent(`${location.content}`);
       infowindow.open(map, marker);
     });
+  }
+
+  const escape = str => {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
 
 
