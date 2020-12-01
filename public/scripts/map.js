@@ -1,4 +1,3 @@
-
 let map;
 let markers = [{coords:{lat: 43.7169, lng: -79.3389},
               iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
@@ -34,10 +33,10 @@ function initMap() {
   let geocoder = new google.maps.Geocoder;
   autocomplete.addListener('place_changed', function() {
     // Clear out the old markers.
-    searchMarker.forEach((marker) => {
-      marker.setMap(null);
-    });
-    searchMarker = [];
+    // searchMarker.forEach((marker) => {
+    //   marker.setMap(null);
+    // });
+    // searchMarker = [];
 
     let place = autocomplete.getPlace();
     let marker = new google.maps.Marker({map: map});
@@ -60,21 +59,15 @@ function initMap() {
       marker.setVisible(true);
 
       searchMarker.push(marker);
+      console.log("searchMarker: ", searchMarker);
       });
+
+      // Remove pin on double click
+      marker.addListener("dblclick", function() {
+        marker.setMap(null);
+      })
+
     });
-
-    // listen for click on map
-    google.maps.event.addListener(map, 'dblclick',
-    function(event){
-      //Add marker
-      addMarker({coords:event.latLng})
-    })
-
-
-    // addMarker({coords:{lat: 43.7169, lng: -79.3389},
-    //           iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-    //           content: '<h1>Pop-up example</h1>'});
-    // addMarker({coords:{lat: 43.6424, lng: -79.3860}});
 
   }
 
@@ -86,7 +79,6 @@ function initMap() {
     });
     markers.push(marker);
   }
-
 
   $(()=> {
     $("#addPoint").click( ()=> {
