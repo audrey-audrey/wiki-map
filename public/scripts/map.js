@@ -1,10 +1,8 @@
 let markers = [
                 { coords: {lat: 43.7169, lng: -79.3389},
-                  iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                  content: '<h1>Pop-up example</h1>'},
+                  content: '<h4>Pop-up example</h4> <p> This is a pop up example </p>'},
                 { coords:{lat: 43.6424, lng: -79.3860},
-                  content: '<h2>Pop-up example2</h2>'
-
+                  content: '<h4>Pop-up example2</h4> <p> This is a pop up example!!!!! </p>'
                 }
               ];
 let searchMarker = [];
@@ -21,23 +19,21 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), options);
   let infowindow = new google.maps.InfoWindow();
 
-  // loop through markers
-  for(let i = 0; i < markers.length; i++) {
-    marker = new google.maps.Marker({
-      position: markers[i].coords,
-      icon: markers[i].iconImage,
-      map: map,
+  function placeMarker (location) {
+    const marker = new google.maps.Marker({
+      position : new google.maps.LatLng( location.coords ),
+      icon: location.iconImage,
+      map : map
     });
-
-    // Listen for click on markers to view infowindow
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      return function() {
-        infowindow.setContent(markers[i].content);
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.close(); // Close previously opened infowindow
+        infowindow.setContent(`${location.content}`);
         infowindow.open(map, marker);
-      }
-    })(marker, i));
-
+    });
   }
+
+   // ITERATE ALL LOCATIONS. Pass every location to placeMarker
+   markers.forEach( placeMarker );
 
   const input = document.getElementById('pac-input');
   const autocomplete = new google.maps.places.Autocomplete(input);
@@ -94,11 +90,12 @@ function initMap() {
     $(()=> {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
-        console.log(markers);
         addMarker({
           coords: {lat: coordsArray[0], lng: coordsArray[1]},
-          iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-          content: "HELLO"
+          content: '<h4>'+ $("#title").val() + '</h4>' +
+                   '<p>' + $("#description").val() + '</p>' +
+                   `<p id = "markerImage"> <img src = ${$("#image").val()} ></p>`,
+
         }, map);
         coordsArray = [];
       })
@@ -107,19 +104,23 @@ function initMap() {
   }
 
 
-
-
   // Adds a marker to the map and push to the array.
   function addMarker(location, map) {
-    console.log(location)
+    let infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       position: location.coords,
       icon: location.iconImage,
       map: map,
+      animation: google.maps.Animation.DROP
     });
     console.log(markers);
     markers.push(marker);
     console.log(markers);
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.close(); // Close previously opened infowindow
+      infowindow.setContent(`${location.content}`);
+      infowindow.open(map, marker);
+    });
   }
 
 
