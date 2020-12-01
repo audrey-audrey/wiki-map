@@ -23,7 +23,6 @@ function initMap() {
   function placeMarker (location) {
     const marker = new google.maps.Marker({
       position : new google.maps.LatLng( location.coords ),
-      icon: location.iconImage,
       map : map
     });
     google.maps.event.addListener(marker, 'click', function() {
@@ -95,6 +94,7 @@ function initMap() {
         addMarker({
           lat: coordsArray[0],
           lng: coordsArray[1],
+          mapTitle: escape($("#mapTitle").val()),
           title: escape($("#title").val()),
           description: escape($("#description").val()),
           image: escape($("#image").val())
@@ -142,6 +142,7 @@ function initMap() {
     console.log('markers',markers);
 
     // adding pins for database
+    const mapTitle = location.mapTitle;
     const name = location.title;
     const description = location.description;
     const lat = location.lat;
@@ -150,7 +151,7 @@ function initMap() {
     const map_id = 1;
     const user_id =1;
 
-    const pin = {name, description, lat, lng, image, map_id, user_id};
+    const pin = {mapTitle, name, description, lat, lng, image, map_id, user_id};
 
     pins.push(pin);
     console.log('pins', pins)
