@@ -142,7 +142,7 @@ function initMap() {
     console.log('markers',markers);
 
     // adding pins for database
-    const name = location.name;
+    const name = location.title;
     const description = location.description;
     const lat = location.lat;
     const lng = location.lng;
