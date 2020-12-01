@@ -1,8 +1,14 @@
-let markers = [{coords:{lat: 43.7169, lng: -79.3389},
-              iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-              content: '<h1>Pop-up example</h1>'},
-              {coords:{lat: 43.6424, lng: -79.3860}}];
+let markers = [
+                { coords: {lat: 43.7169, lng: -79.3389},
+                  iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                  content: '<h1>Pop-up example</h1>'},
+                { coords:{lat: 43.6424, lng: -79.3860},
+                  content: '<h2>Pop-up example2</h2>'
+
+                }
+              ];
 let searchMarker = [];
+
 
 function initMap() {
   // map options
@@ -13,15 +19,24 @@ function initMap() {
 
   // new map
   const map = new google.maps.Map(document.getElementById("map"), options);
+  let infowindow = new google.maps.InfoWindow();
 
   // loop through markers
   for(let i = 0; i < markers.length; i++) {
-    var temp = new google.maps.Marker({
+    marker = new google.maps.Marker({
       position: markers[i].coords,
       icon: markers[i].iconImage,
       map: map,
     });
-    console.log(temp);
+
+    // Listen for click on markers to view infowindow
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infowindow.setContent(markers[i].content);
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+
   }
 
   const input = document.getElementById('pac-input');
