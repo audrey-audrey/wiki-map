@@ -91,11 +91,11 @@ function initMap() {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
         addMarker({
-          coords: {lat: coordsArray[0], lng: coordsArray[1]},
-          content: '<h4>'+ escape($("#title").val()) + '</h4>' +
-                   '<p>' + escape($("#description").val()) + '</p>' +
-                   '<p id = "markerImage"> <img src = ' + escape($("#image").val()) +'></p>',
-
+          lat: coordsArray[0],
+          lng: coordsArray[1],
+          title: escape($("#title").val()),
+          description: escape($("#description").val()),
+          image: escape($("#image").val())
         }, map);
         coordsArray = [];
         $(".table").append(`
@@ -119,8 +119,10 @@ function initMap() {
   function addMarker(location, map) {
     let infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: location.coords,
-      icon: location.iconImage,
+      position: {
+        lat: location.lat,
+        lng: location.lng
+      },
       map: map,
       animation: google.maps.Animation.DROP
     });
@@ -129,7 +131,11 @@ function initMap() {
     console.log(markers);
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.close(); // Close previously opened infowindow
-      infowindow.setContent(`${location.content}`);
+      infowindow.setContent(
+        '<h4>'+ location.title + '</h4>' +
+        '<p>' + location.description + '</p>' +
+        '<p id = "markerImage"> <img src = ' + location.image +'></p>',
+      );
       infowindow.open(map, marker);
     });
   }
