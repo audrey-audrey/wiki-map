@@ -44,16 +44,18 @@ const usersRoutes = require("./routes/users");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const newRoutes = require("./routes/new");
+const profileRoutes = require("./routes/profile");
 
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/users", usersRoutes(db));
+app.use("api/users", usersRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/new", newRoutes(db));
+app.use("/profile", profileRoutes(db));
 
 
 // Home page
@@ -72,7 +74,7 @@ app.get("/", (req, res) => {
     };
     db.query(query)
     .then(data => {
-      console.log(data.rows[0].name)
+      //console.log(data.rows[0].name)
       const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
       res.render("index", {message: welcomeMessage});
     })
