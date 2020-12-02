@@ -151,11 +151,12 @@ function initMap() {
     const lat = location.lat;
     const lng = location.lng;
     const image = location.image;
-    const map_id = 1;
-    const user_id =1;
+    // get map_id from route query
+    // const map_id = 1;
+    const user_id = 1;
 
     mapInfo.name = location.mapTitle;
-    const pin = {name, description, lat, lng, image, map_id, user_id};
+    const pin = {name, description, lat, lng, image, user_id};
 
     pins.push(pin);
     console.log('pins', pins)

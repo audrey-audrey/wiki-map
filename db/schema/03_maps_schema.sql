@@ -9,5 +9,5 @@ CREATE TABLE maps(
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255),
   image VARCHAR(255),
-  date_created DATE NOT NULL
+  date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
