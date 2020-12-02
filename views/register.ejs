@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
-  <%- include('partials/_header') %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
   <title> Midterm App - Register</title>
@@ -12,15 +11,23 @@
 <title>Midterm App - Register</title>
 
 <body>
+  <%- include('partials/_header') %>
   <div class = "loginbody">
     <h4 class="card-title" style = "margin-bottom: 30px"> Register </h4>
-    <form action = "/login" method = "POST">
+    <% if (!name) { %>
+      <h5 class="error-message">Please enter your name!</h5>
+    <% } else if (!password) { %>
+      <h5 class="error-message">Please enter a password!</h5>
+    <% } %>
+    <form action = "/register" method = "POST">
+    <h5 style = "margin-bottom: 15px"> Name:  </h5>
+    <input type = "text" name = "name" style="width: 320px; margin-bottom: 15px; padding: 4px"/>
     <h5 style = "margin-bottom: 15px"> Email Address:  </h5>
     <input type = "email" name = "email" placeholder = "email@example.com" style="width: 320px; margin-bottom: 15px; padding: 4px"/>
     <h5 style = > Password: </h5>
     <input type = "password" name = "password" placeholder = "password" style="width: 320px; padding: 4px"/>
   </div>
-      <button style = "margin-left: 40px; margin-bottom: 20px" type="submit" class="btn btn-primary"> Login </button>
+      <button style = "margin-left: 40px; margin-bottom: 20px" type="submit" class="btn btn-primary"> Register </button>
     </form>
 
     <div class="card-footer text-muted"></div>

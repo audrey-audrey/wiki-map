@@ -2,9 +2,16 @@
   <nav>
     <a class = "homelink" href="/"><h3>Midterm App</h3></a>
     <div class = 'reglogin-btn'>
+    <% if (message) { %>
+      <p><%= message %></p>
+    <% } %>
     <a class="btn btn-dark" href="/new">Create a Map!</a>
+    <% if (message) { %>
+      <a href = "/logout" class="btn btn-primary"> Log Out </a>
+    <% } else { %>
     <a href = "/register" class="btn btn-primary"> Register </a>
     <a href = "/login" class="btn btn-primary" style = "margin-left: 10px"> Login </a>
+    <% } %>
     </div>
   </nav>
 </header>

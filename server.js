@@ -4,11 +4,14 @@ require('dotenv').config();
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
+//const cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session")
 const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -31,12 +34,18 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+app.use(cookieSession({
+  name: 'session2',
+  secret:'notmycookies'
+}));
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const newRoutes = require("./routes/new");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -47,11 +56,38 @@ app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/new", newRoutes(db));
 
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const userId = req.session.user_id;
+  if (userId) {
+    const query = {
+      text: `
+        SELECT name
+        FROM users
+        WHERE id = $1
+      `,
+      values: [userId]
+    };
+    db.query(query)
+    .then(data => {
+      console.log(data.rows[0].name)
+      const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
+      res.render("index", {message: welcomeMessage});
+    })
+    .catch(error => {
+      console.error('Error: ', error.message);
+    })
+  } else {
+    res.render("index", {message: null});
+  }
+});
+
+app.get("/logout", (req, res) => {
+  req.session = null;
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {
