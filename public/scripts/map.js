@@ -7,6 +7,10 @@ let markers = [
               ];
 let searchMarker = [];
 
+// for database
+let pins = [];
+let mapInfo = {};
+
 
 function initMap() {
   // map options
@@ -22,7 +26,6 @@ function initMap() {
   function placeMarker (location) {
     const marker = new google.maps.Marker({
       position : new google.maps.LatLng( location.coords ),
-      icon: location.iconImage,
       map : map
     });
     google.maps.event.addListener(marker, 'click', function() {
@@ -87,17 +90,41 @@ function initMap() {
 
     });
 
+    // Adding pins to map
     $(()=> {
       $("#addPoint").click( ()=> {
         console.log('addpoint button clicked')
         addMarker({
-          coords: {lat: coordsArray[0], lng: coordsArray[1]},
-          content: '<h4>'+ $("#title").val() + '</h4>' +
-                   '<p>' + $("#description").val() + '</p>' +
-                   `<p id = "markerImage"> <img src = ${$("#image").val()} ></p>`,
-
+          lat: coordsArray[0],
+          lng: coordsArray[1],
+          mapTitle: escape($("#mapTitle").val()),
+          title: escape($("#title").val()),
+          description: escape($("#description").val()),
+          image: escape($("#image").val())
         }, map);
         coordsArray = [];
+        $(".table").append(`
+        <tr>
+          <th scope="row"> ${markers.length} </th>
+          <td> ${$("#title").val()} </td>
+          <td> ${$("#description").val()} </td>
+        </tr>
+        `);
+        $("#pac-input").val("");
+        $("#title").val("");
+        $("#description").val("");
+        $("#image").val("");
+      })
+
+      // Sending map and markers array to the database
+      $("#createMap").click(()=> {
+        // console.log('markers array',markers)
+        $.post("http://localhost:8080/new",
+        {mapInfo: mapInfo,
+          pins: pins},
+        function(data, status){
+          console.log('Sending data')
+        });
       })
     })
 
@@ -124,19 +151,47 @@ function initMap() {
   function addMarker(location, map) {
     let infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: location.coords,
-      icon: location.iconImage,
+      position: {
+        lat: location.lat,
+        lng: location.lng
+      },
       map: map,
       animation: google.maps.Animation.DROP
     });
-    console.log(markers);
     markers.push(marker);
-    console.log(markers);
+    console.log('markers',markers);
+
+    // adding pins for database
+    const name = location.title;
+    const description = location.description;
+    const lat = location.lat;
+    const lng = location.lng;
+    const image = location.image;
+    // get map_id from route query
+    // const map_id = 1;
+    const user_id = 1;
+
+    mapInfo.name = location.mapTitle;
+    const pin = {name, description, lat, lng, image, user_id};
+
+    pins.push(pin);
+    console.log('pins', pins)
+
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.close(); // Close previously opened infowindow
-      infowindow.setContent(`${location.content}`);
+      infowindow.setContent(
+        '<h4>'+ location.title + '</h4>' +
+        '<p>' + location.description + '</p>' +
+        '<p id = "markerImage"> <img src = ' + location.image +'></p>',
+      );
       infowindow.open(map, marker);
     });
+  }
+
+  const escape = str => {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
 
 
