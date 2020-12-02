@@ -10,6 +10,8 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    const id = req.session.user_id;
+    if (!id) {
     db.query(`SELECT * FROM users;`)
       .then(data => {
         const users = data.rows;
@@ -20,7 +22,25 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+    } else {
+      res.redirect(`/users/:${id}`);
+    }
+  });
+
+  router.get("/:id", (req, res) => {
+    console.log('Inside /:id', req.params.id);
+    // const userId = req.session.user_id;
+    // if (!userId || userId !== req.params.id) {
+    //   res.redirect("/");
+    // } else {
+    //   console.log("second", userId);
+    // }
   });
 
   return router;
 };
+
+
+// Original Route to api/users
+
+
