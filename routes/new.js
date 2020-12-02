@@ -1,5 +1,5 @@
 const express = require("express");
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -14,54 +14,52 @@ module.exports = (db) => {
         values: [userId]
       };
       db.query(query)
-      .then(data => {
-        console.log(data.rows[0].name)
-        const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
-        res.render("new", {message: welcomeMessage});
-      })
-      .catch(error => {
-        console.error('Error: ', error.message);
-      })
+        .then(data => {
+          console.log(data.rows[0].name)
+          const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
+          res.render("new", { message: welcomeMessage });
+        })
+        .catch(error => {
+          console.error('Error: ', error.message);
+        })
     } else {
       res.redirect("login");
     }
   });
 
   router.post("/", (req, res) => {
-    // empty queries array
+    // user id of currently logged in user
+    const userId = req.session.user_id;
 
     const queries = [];
 
-    console.log('req', req.body.mapInfo.name)
-
     // // Inserting map data
     const queryString = `
-    INSERT INTO maps (name)
-    VALUES ($1)
+    INSERT INTO maps (name, owner_id)
+    VALUES ($1, $2)
     RETURNING id;`
 
-    const values = [req.body.mapInfo.name];
+    const values = [req.body.mapInfo.name, userId];
 
     db.query(queryString, values)
-    .then(data => {
-      const map_id = data.rows[0].id;
+      .then(data => {
+        const map_id = data.rows[0].id;
 
-      // Inserting pin data
-      for (const pin of req.body.pins) {
-        const queryString = `
-   INSERT INTO pins (name, description, lat, lng, image, map_id, user_id)
-   VALUES ($1, $2, $3, $4, $5, $6, $7);`
+        // Inserting pin data
+        for (const pin of req.body.pins) {
+          const queryString = `
+          INSERT INTO pins (name, description, lat, lng, image, map_id, user_id)
+          VALUES ($1, $2, $3, $4, $5, $6, $7);`
+          const values = [pin.name, pin.description, pin.lat, pin.lng, pin.image, map_id, userId]
 
-        const values = [pin.name, pin.description, pin.lat, pin.lng, pin.image, map_id, pin.user_id]
+          const query = db.query(queryString, values)
 
-        const query = db.query(queryString, values)
+          queries.push(query);
+        }
 
-        queries.push(query);
-      }
-
-      Promise.all(queries)
-      .then(()=> {res.send('All good!')})
-    })
+        Promise.all(queries)
+          .then(() => { res.send('All good!') })
+      })
   });
 
   return router;
