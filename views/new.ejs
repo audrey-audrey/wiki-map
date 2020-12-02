@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%- include('partials/_header') %>
+
     <!-- Font CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
@@ -30,6 +30,7 @@
 
   <body>
     <!-- Page-specific (main) content here -->
+    <%- include('partials/_header') %>
     <main class="container">
       <article class = "mapContainer">
         <div id = "map" ></div>
@@ -40,7 +41,7 @@
         <textarea name = "text" id = "description" placeholder = "Description"></textarea>
         <input name = "image" id = "image" placeholder = "image url" />
         <a class="btn btn-success" id = 'addPoint'> Add Point </a>
-        <a class="btn btn-success"> Create Map! </a>
+        <a class="btn btn-success" type = "submit" > Create Map! </a>
       </form>
 
     </main>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-zz8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
-  <%- include('partials/_header') %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
   <title> Midterm App - Login </title>
@@ -12,8 +11,14 @@
 
 
 <body>
+  <%- include('partials/_header') %>
   <div class = "loginbody">
     <h4 class="card-title" style = "margin-bottom: 30px"> Login </h4>
+    <% if (!userId) { %>
+      <h5 class="error-message">Invalid Email, Please register or try again!</h5>
+    <% } else if (!password) { %>
+      <h5 class="error-message">Invalid Password, Please try again!</h5>
+    <% } %>
     <form action = "/login" method = "POST">
     <h5 style = "margin-bottom: 15px"> Email Address:  </h5>
     <input type = "email" name = "email" placeholder = "email@example.com" style="width: 320px; margin-bottom: 15px; padding: 4px"/>

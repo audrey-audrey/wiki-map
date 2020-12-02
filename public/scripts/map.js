@@ -70,9 +70,9 @@ function initMap() {
       });
 
       // Remove pin on double click
-      marker.addListener("dblclick", function() {
-        marker.setMap(null);
-      })
+      // marker.addListener("dblclick", function() {
+      //   marker.setMap(null);
+      // })
 
     });
 
@@ -88,6 +88,22 @@ function initMap() {
         coordsArray = [];
       })
     })
+
+    $(() => {
+      $("#pac-input").click(() => {
+        console.log('point clicked.  Not added.')
+        marker.setMap(null);
+      })
+    });
+
+    $(document).ready(() => {
+      console.log('made it before');
+      $("#createMap").submit(function(event) {
+          event.preventDefault();
+          console.log('made it after');
+          console.log('create map submitted!');
+      });
+    });
 
   }
 
@@ -106,6 +122,10 @@ function initMap() {
     markers.push(marker);
     console.log(markers);
   }
+
+
+
+
 
 
 
