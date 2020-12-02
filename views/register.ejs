@@ -16,6 +16,8 @@
     <h4 class="card-title" style = "margin-bottom: 30px"> Register </h4>
     <% if (!name) { %>
       <h5 class="error-message">Please enter your name!</h5>
+    <% } else if (!email) { %>
+      <h5 class="error-message">Please enter an email address!</h5>
     <% } else if (!password) { %>
       <h5 class="error-message">Please enter a password!</h5>
     <% } %>

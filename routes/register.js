@@ -8,7 +8,7 @@ module.exports = (db) => {
     if (userId) {
       res.redirect("/");
     } else {
-      res.render("register", {name: 'not set', password: 'not set', message: null});
+      res.render("register", {name: 'not set', email: 'not set', password: 'not set', message: null});
     }
   });
 
@@ -16,8 +16,10 @@ module.exports = (db) => {
     const {name, email, password} = req.body;
     if (!name) {
       return res.render("register", {name: null, message: null})
+    } else if (!email) {
+      return res.render("register", {name: name, email: null, message: null});
     } else if (!password) {
-      return res.render("register", {name: name, password: null, message: null});
+      return res.render("register", {name: name, email: email, password: null, message: null});
     }
     console.log('name', name, 'email: ', email, 'password: ', password);
     const query = {
