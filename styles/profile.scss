@@ -30,7 +30,9 @@ nav {
     margin-right: 1em;
   }
 }
-
+.col-md-3 {
+  width: 25 vw;
+}
 /* Profile container */
 .profile {
   margin: 20px 0;
@@ -72,9 +74,12 @@ nav {
   margin-bottom: 15px;
 }
 
-
 .profile-usermenu {
   margin-top: 30px;
+}
+
+.usermenu {
+  list-style-type: none;
 }
 
 .profile-usermenu ul li {
@@ -113,6 +118,9 @@ nav {
 }
 
 /* Profile Content */
+.col-md-9 {
+  width: 75vw;
+}
 .profile-content {
   padding: 20px;
   background: #fff;

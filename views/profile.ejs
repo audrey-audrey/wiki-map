@@ -11,6 +11,10 @@
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <link rel="stylesheet" href="/styles/profile.css" type="text/css"/>
+
+  <!-- External Font -->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg></script>
+
   <!------ Include the above in your HEAD tag ---------->
 
   <title> Midterm App - Login </title>
@@ -42,21 +46,18 @@
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
-					<ul class="nav">
+					<ul class="usermenu">
 						<li class="active">
             <!-- OVERVIEW -->
 							<a href="#" class="overview">
-							<i class="glyphicon glyphicon-home"></i>
+                <i class="fas fa-smile"></i>
 							Overview </a>
             </li>
             <!-- Display profile on-click -->
             <script>
               $(document).ready(function() {
                   $('.overview').click(function() {
-                      $(".profile-content").html(
-                        "<h1><span style='color: green;'>GeeksforGeeks"+
-                        "</span><br>This is the content inside the div"+
-                        " after changing innerHTML</h1>");
+                      $(".profile-content").html("overview");
                   })
 
               })
@@ -64,16 +65,14 @@
             <!-- FAVOURITES -->
 						<li>
 							<a href="#" class="favourites">
-							<i class="glyphicon glyphicon-user"></i>
+                <i class="fas fa-star"></i>
 							Favourites </a>
             </li>
             <!-- Display favourites table -->
             <script>
               $(document).ready(function() {
-                  $('.overview').click(function() {
-                      $(".profile-content").html(
-                        "</span><br>This is the content inside the div"+
-                        " after changing innerHTML</h1>");
+                  $('.favourites').click(function() {
+                      $(".profile-content").html("favourites");
                   })
 
               })
@@ -81,17 +80,14 @@
             <!-- CONTRIBUTIONS -->
 						<li>
 							<a href="#" class="contributions">
-							<i class="glyphicon glyphicon-ok"></i>
+                <i class="fas fa-globe-americas"></i>
 							Contributions </a>
             </li>
             <!-- Display contribution on click -->
             <script>
               $(document).ready(function() {
-                  $('.overview').click(function() {
-                      $(".profile-content").html(
-                        "<h1><span style='color: green;'>GeeksforGeeks"+
-                        "</span><br>This is the content inside the div"+
-                        " after changing innerHTML</h1>");
+                  $('.contributions').click(function() {
+                      $(".profile-content").html("contributions");
                   })
 
               })
