@@ -123,7 +123,7 @@ function initMap() {
         {mapInfo: mapInfo,
           pins: pins},
         function(data, status){
-          console.log('Sending data')
+          console.log(data)
         });
       })
     })
@@ -169,10 +169,10 @@ function initMap() {
     const image = location.image;
     // get map_id from route query
     // const map_id = 1;
-    const user_id = 1;
+    // const user_id = 1;
 
     mapInfo.name = location.mapTitle;
-    const pin = {name, description, lat, lng, image, user_id};
+    const pin = {name, description, lat, lng, image};
 
     pins.push(pin);
     console.log('pins', pins)
