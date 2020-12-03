@@ -1,6 +1,26 @@
+// helper functions
+// create list elements to display favourite maps
+const createListElement = function (name) {
+  let $name = `
+  <li>${name.name}</li>
+  `;
+
+  return $name;
+}
+
+// Render map names on profile container
+/**
+ *
+ * @param mapNames = array of objects returned from get request in the following format [ anonymous: {name: ....}, ...]
+ */
+const renderList = function (mapNames) {
+  for(const name of mapNames){
+    const $name = createListElement(name);
+    $('.favourites-content-list').prepend($name);
+  }
+}
+
 $(document).ready(function () {
-
-
   $('.overview').click(function () {
     if ($('.favourites-content').is(':visible')) {
       $('.favourites-content').hide()
@@ -10,9 +30,6 @@ $(document).ready(function () {
     }
 
   })
-
-
-
 
   $('.favourites').click(function () {
     if ($('.overview-content').is(':visible')) {
@@ -26,7 +43,8 @@ $(document).ready(function () {
 
     // get data from database
     $.get("/profile/favourites", function (data, status) {
-      alert("Data: " + data + "\nStatus: " + status);
+      renderList(data)
+      // alert("Data: " + data + "\nStatus: " + status);
     })
   })
 
