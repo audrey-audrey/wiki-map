@@ -8,9 +8,9 @@ $(document).ready(function () {
   //   alert("Data: " + data + "\nStatus: " + status);
   // })
 
-  $.get("/new/" + mapId , function (data, status) {
-    console.log("hello", status)
-  })
+  // $.get("/new/" + mapId , function (data, status) {
+  //   console.log("hello", status)
+  // })
 
   let markers = [];
 

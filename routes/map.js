@@ -27,7 +27,7 @@ module.exports = (db) => {
           lat: data.rows[0].lat,
           lng: data.rows[0].lng
         }
-        return res.render('map', templateVars);
+        return res.render('existingMap', templateVars);
       })
       .catch(err => {
         console.error("Error", err);
