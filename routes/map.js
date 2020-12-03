@@ -5,6 +5,19 @@ module.exports = (db) => {
   router.get("/map/:mapID", (req,res) => {
     console.log('we hit the ned point')
     const userId = req.session.user_id;
+    let name;
+    const userQuery = {
+      text: `
+        SELECT name
+        FROM users
+        WHERE id = $1;
+      `,
+      values: [userId]
+    }
+    db.query(userQuery)
+    .then (data => {
+      name = data.rows[0].name;
+    })
     if (userId) {
       const query = {
         text: `
@@ -20,7 +33,7 @@ module.exports = (db) => {
         console.log('data', data);
         const templateVars = {
           map: data.rows[0],
-          message: `Welcome ${data.rows[0].username.split(' ')[0]}`,
+          message: `Welcome ${name.split(' ')[0]}`,
           mapid: data.rows[0].id,
           mapTitle: data.rows[0].mapname,
           pinTitle: data.rows[0].pinname,
