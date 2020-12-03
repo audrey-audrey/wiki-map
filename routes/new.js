@@ -66,14 +66,13 @@ module.exports = (db) => {
   // Get request only for getting pins/markers info
   router.get("/:id", (req, res) => {
     const mapId = req.params.id;
-    const test = 21;
     const query = {
       text: `
       SELECT lat, lng
       FROM pins
       WHERE map_id = $1;
       `,
-      values: [test]
+      values: [mapId]
     };
     db.query(query)
       .then(data => {

@@ -1,17 +1,3 @@
-$(document).ready(function () {
-
-  const pathName = window.location.pathname;
-  const mapId = pathName.substring(5)
-  console.log('mapId', mapId )
-
-  // $.get("/map/yoyo", mapId, function(data, status) {
-  //   alert("Data: " + data + "\nStatus: " + status);
-  // })
-
-  // $.get("/new/" + mapId , function (data, status) {
-  //   console.log("hello", status)
-  // })
-
   let markers = [];
 
   let searchMarker = [];
@@ -206,7 +192,3 @@ $(document).ready(function () {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
-
-  initMap();
-
-})
