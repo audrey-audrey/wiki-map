@@ -68,7 +68,7 @@ module.exports = (db) => {
     const mapId = req.params.id;
     const query = {
       text: `
-      SELECT lat, lng
+      SELECT name, description, lat, lng, image
       FROM pins
       WHERE map_id = $1;
       `,
