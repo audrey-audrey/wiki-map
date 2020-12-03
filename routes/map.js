@@ -19,8 +19,9 @@ module.exports = (db) => {
       .then(data => {
         console.log('data', data);
         const templateVars = {
-          maps: data.rows,
+          map: data.rows[0],
           message: `Welcome ${data.rows[0].username.split(' ')[0]}`,
+          mapid: data.rows[0].id,
           mapTitle: data.rows[0].mapname,
           pinTitle: data.rows[0].pinname,
           pinDescription : data.rows[0].description,
