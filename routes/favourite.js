@@ -9,7 +9,6 @@ module.exports = (db) => {
     if (userId) {
       const mapID = req.params.mapID;
       console.log('userid', userId, 'mapid', mapID);
-
       const query = {
         text: `
         INSERT INTO favourite_maps (user_id, map_id)
