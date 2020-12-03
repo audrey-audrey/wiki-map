@@ -53,13 +53,13 @@ body {
     }
   }
 
-  .container{
+  .container {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
     justify-content: space-between;
 
-    .pinDescription{
+    .pinDescription {
       display: flex;
       flex-direction: column;
       width: 400px;
@@ -109,6 +109,14 @@ body {
     margin-top: 60px;
     margin-left: 5%;
     width: 70%;
+  }
+
+  #editVisible {
+    display: none;
+  }
+
+  #editVisibleTable{
+    display: none;
   }
 
 

@@ -24,6 +24,7 @@
     <!-- External JS -->
     <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
     <script src = "/scripts/map.js"></script>
+    <script src = "/scripts/edit.js"></script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgGJiITWyIbBkI8QeTZO5ZmMBUnxLrbNg&callback=initMap&libraries=&v=weekly"
     defer>
@@ -35,24 +36,17 @@
     <!-- Page-specific (main) content here -->
     <%- include('partials/_header') %>
     <main class="container">
-
-      <article class = "mapContainer">
-        <header class = "mapHeader">
-          <div>
-          <h4 class = "mapTitle"> Best Places to Eat in Toronto! </h4>
-          </div>
-          <h5 class = "userID"> </h5>
-        </header>
-        <div id="map" ></div>
-        <footer class = "mapFooter">
-          <h6 class = "footerDate">  days ago</h6>
-          <div class = "footerFeeatures">
-            <a href = "/register" class="btn btn-primary"> Edit </a>
-            <a href = "/register" class="btn btn-primary"> <i class="fas fa-star"></i> </a>
-          </div>
-        </footer>
-      </article>
-
+      <% for(let map of maps) { %>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= map.image %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">  <%= map.mapname %> </h5>
+          <p class="card-text"> Author: <%= map.username %> </p>
+          <a href="/map/<%=map.id%>" class="btn btn-primary"> View/Edit </a>
+          <a href="" class="btn btn-primary"> <i class="fas fa-star"></i>  </a>
+        </div>
+      </div>
+      <% } %>
     </main>
   </body>
 </html>

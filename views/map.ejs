@@ -19,33 +19,56 @@
 
     <!-- App JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
 
     <!-- External JS -->
     <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
     <script src = "/scripts/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqSekGLv3McLkXm3ykXJKC-KX1kSEYB1M&libraries=places&callback=initMap"
-    async defer></script>
+    <script src = "/scripts/edit.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgGJiITWyIbBkI8QeTZO5ZmMBUnxLrbNg&callback=initMap&libraries=&v=weekly"
+    defer>
+    </script>
+
   </head>
 
   <body>
     <!-- Page-specific (main) content here -->
     <%- include('partials/_header') %>
     <main class="container">
+
       <article class = "mapContainer">
-        <div id = "map" ></div>
+        <header class = "mapHeader">
+          <div>
+          <h4 class = "mapTitle">  <%= mapTitle %> </h4>
+          </div>
+          <h5 class = "userID"> </h5>
+        </header>
+        <div id="map" ></div>
+        <footer class = "mapFooter">
+          <h6 class = "footerDate">  days ago</h6>
+          <div class = "footerFeeatures">
+            <% if (message) { %>
+            <a class="btn btn-primary" id = "showEdit" > Edit </a>
+            <% } %>
+            <% if (!message) { %>
+              <a href = "/login" class="btn btn-danger" > Log in to Make an Edit </a>
+              <% } %>
+            <a href = "" class="btn btn-primary"> <i class="fas fa-star"></i> </a>
+          </div>
+        </footer>
       </article>
-      <form class = "pinDescription">
+      <form class = "pinDescription" id = "editVisible" >
         <input name = "mapTitle" id = "mapTitle" placeholder = "Map Title" />
         <input id="pac-input" class="controls"  placeholder="Search for locations!">
         <input name = "title" id = "title" placeholder = "Title" />
         <textarea name = "text" id = "description" placeholder = "Description"></textarea>
         <input name = "image" id = "image" placeholder = "image url" />
         <a class="btn btn-success" id = 'addPoint'> Add Point </a>
-        <a class="btn btn-success" id= "createMap"> Create Map! </a>
+        <a class="btn btn-success" id= "createMap"> Update Map! </a>
       </form>
     </main>
-    <table class="table">
+    <table class="table" id = "editVisibleTable">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -54,7 +77,18 @@
         </tr>
       </thead>
       <tbody>
+        <% for(let map in maps) { %>
+          <tr>
+            <td><%= Number(map) + 1 %></td>
+            <td><%= pinTitle %></td>
+            <td> <%= pinDescription %> </td>
+            <td><form method="POST" >
+              <button type = "submit" class="btn btn-outline-danger" > Delete </button>
+            </form></td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
   </body>
+
 </html>

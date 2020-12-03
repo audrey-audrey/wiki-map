@@ -1,16 +1,11 @@
 let markers = [
-                { coords: {lat: 43.7169, lng: -79.3389},
-                  content: '<h4>Pop-up example</h4> <p> This is a pop up example </p>'},
-                { coords:{lat: 43.6424, lng: -79.3860},
-                  content: '<h4>Pop-up example2</h4> <p> This is a pop up example!!!!! </p>'
-                }
+
               ];
 let searchMarker = [];
 
 // for database
 let pins = [];
 let mapInfo = {};
-
 
 function initMap() {
   // map options
@@ -35,8 +30,8 @@ function initMap() {
     });
   }
 
-   // ITERATE ALL LOCATIONS. Pass every location to placeMarker
-   markers.forEach( placeMarker );
+  // ITERATE ALL LOCATIONS. Pass every location to placeMarker
+  markers.forEach( placeMarker );
 
   const input = document.getElementById('pac-input');
   const autocomplete = new google.maps.places.Autocomplete(input);
@@ -193,6 +188,8 @@ function initMap() {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
+
+
 
 
 

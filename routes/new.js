@@ -17,7 +17,7 @@ module.exports = (db) => {
         .then(data => {
           console.log(data.rows[0].name)
           const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
-          res.render("new", { message: welcomeMessage });
+          res.render("new", { message: welcomeMessage, maps: data.rows});
         })
         .catch(error => {
           console.error('Error: ', error.message);
