@@ -46,7 +46,7 @@ const registerRoutes = require("./routes/register");
 const newRoutes = require("./routes/new");
 const profileRoutes = require("./routes/profile");
 const mapRoutes = require("./routes/map");
-
+const favouriteRoutes = require("./routes/favourite");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -57,8 +57,8 @@ app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/new", newRoutes(db));
 app.use("/profile", profileRoutes(db));
-
 app.use("/", mapRoutes(db));
+app.use("/", favouriteRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
