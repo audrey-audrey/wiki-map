@@ -36,11 +36,7 @@ module.exports = (db) => {
       res.redirect('/');
     })
     .catch(err => {
-<<<<<<< HEAD
       console.error("Error", err.message);
-=======
-      console.error("Error", err);
->>>>>>> feature/addNewMapPage
     })
   });
   return router;
