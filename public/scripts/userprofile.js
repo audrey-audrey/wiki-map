@@ -2,9 +2,8 @@
 // create list elements to display favourite maps
 const createListElement = function (name) {
   let $name = `
-  <li>${name.name}</li>
+  <li><a href=/maps/${name.id}>${name.name}</a></li>
   `;
-
   return $name;
 }
 
@@ -13,14 +12,24 @@ const createListElement = function (name) {
  *
  * @param mapNames = array of objects returned from get request in the following format [ anonymous: {name: ....}, ...]
  */
-const renderList = function (mapNames) {
+const renderList = function (mapNames, container) {
   for(const name of mapNames){
     const $name = createListElement(name);
-    $('.favourites-content-list').prepend($name);
+    $(container).append($name);
   }
 }
 
 $(document).ready(function () {
+  // get data from database for favourite maps
+  $.get("/profile/favourites", function (data, status) {
+    renderList(data, ".favourites-content-list")
+  })
+
+  // get data from database for maps that user have contributed to
+  $.get("/profile/contributions", function (data, status) {
+    renderList(data, ".contributions-content-list")
+  })
+
   $('.overview').click(function () {
     if ($('.favourites-content').is(':visible')) {
       $('.favourites-content').hide()
@@ -40,12 +49,6 @@ $(document).ready(function () {
     }
 
     $(".favourites-content").show();
-
-    // get data from database
-    $.get("/profile/favourites", function (data, status) {
-      renderList(data)
-      // alert("Data: " + data + "\nStatus: " + status);
-    })
   })
 
 
