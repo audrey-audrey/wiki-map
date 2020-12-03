@@ -1,6 +1,4 @@
-let markers = [
-
-];
+let markers = [];
 let searchMarker = [];
 
 // for database
@@ -13,6 +11,15 @@ const options = {
 zoom: 14,
 center: { lat: 43.6532, lng: -79.3832 }
 }
+
+$.ajax({
+  url: "/map/1",
+  method: "GET",
+})
+.then(res => {
+
+
+})
 
 // new map
 const map = new google.maps.Map(document.getElementById("map"), options);

@@ -8,7 +8,7 @@ module.exports = (db) => {
     if (userId) {
       const query = {
         text: `
-        SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description
+        SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description, pins.lat, pins.lng
         FROM maps
         JOIN users ON owner_id = users.id
         JOIN pins ON map_id = maps.id
@@ -23,7 +23,9 @@ module.exports = (db) => {
           message: `Welcome ${data.rows[0].username.split(' ')[0]}`,
           mapTitle: data.rows[0].mapname,
           pinTitle: data.rows[0].pinname,
-          pinDescription : data.rows[0].description
+          pinDescription : data.rows[0].description,
+          lat: data.rows[0].lat,
+          lng: data.rows[0].lng
         }
         return res.render('map', templateVars);
       })

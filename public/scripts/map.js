@@ -2,12 +2,13 @@ let markers = [
 
               ];
 let searchMarker = [];
-
+console.log(markers);
 // for database
 let pins = [];
 let mapInfo = {};
 
 function initMap() {
+
   // map options
   const options = {
     zoom: 14,
@@ -32,6 +33,7 @@ function initMap() {
 
   // ITERATE ALL LOCATIONS. Pass every location to placeMarker
   markers.forEach( placeMarker );
+
 
   const input = document.getElementById('pac-input');
   const autocomplete = new google.maps.places.Autocomplete(input);
@@ -138,6 +140,7 @@ function initMap() {
           console.log('create map submitted!');
       });
     });
+
 
   }
 
