@@ -6,10 +6,16 @@ $(document).ready(function () {
    */
   let pinsFromDatabase = [];
 
-  const loopData = function (data) {
-    for (const coords of data) {
+  const loopData = function (pins) {
+    for (const pin of pins) {
       // console.log('from get request', coords)
-      pinsFromDatabase.push({ lat: coords.lat, lng: coords.lng })
+      pinsFromDatabase.push({
+        name        : pin.name,
+        description : pin.description,
+        lat         : pin.lat,
+        lng         : pin.lng,
+        image       : pin.image
+      })
     }
   }
 
@@ -28,7 +34,6 @@ $(document).ready(function () {
     let mapInfo = {};
 
     function initMap() {
-
       // map options
       const options = {
         zoom: 14,
@@ -38,13 +43,6 @@ $(document).ready(function () {
       // new map
       const map = new google.maps.Map(document.getElementById("map"), options);
       let infowindow = new google.maps.InfoWindow();
-
-      // SHOWING MARKERS FROM DATABASE -- SEPARATE FROM ADDMARKERS
-
-      // const pin = new google.maps.Marker({
-      //   position: {lat: 43.6532, lng: -79.3832},
-      //   map: map
-      // })
 
       //create empty LatLngBounds object
       let bounds = new google.maps.LatLngBounds();
