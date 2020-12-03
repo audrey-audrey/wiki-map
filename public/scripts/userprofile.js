@@ -9,8 +9,9 @@ $(document).ready(function () {
       $('.contributions-content').hide()
     }
 
-    $(".overview-content").show();
   })
+
+
 
 
   $('.favourites').click(function () {
@@ -22,6 +23,11 @@ $(document).ready(function () {
     }
 
     $(".favourites-content").show();
+
+    // get data from database
+    $.get("/profile/favourites", function (data, status) {
+      alert("Data: " + data + "\nStatus: " + status);
+    })
   })
 
 

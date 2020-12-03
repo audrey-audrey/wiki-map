@@ -31,6 +31,24 @@ module.exports = (db) => {
     // }
   });
 
+  // get request for favourites map
+  router.get("/favourites", (req, res) => {
+    const userId = req.session.user_id;
+    const query = {
+      text: `
+        SELECT maps.name as name
+        FROM maps
+        JOIN favourite_maps ON maps.id = map_id
+        WHERE favourite_maps.user_id = $1;
+      `,
+      values: [userId]
+    };
+
+    db.query(query)
+    .then(data => res.send(data.rows))
+  })
+
+
   return router;
 };
 
