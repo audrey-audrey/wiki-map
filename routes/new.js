@@ -62,5 +62,26 @@ module.exports = (db) => {
       })
   });
 
+
+  // Get request only for getting pins/markers info
+  router.get("/:id", (req, res) => {
+    const mapId = req.params.id;
+    const query = {
+      text: `
+      SELECT lat, lng
+      FROM pins
+      WHERE map_id = $1;
+      `,
+      values: [mapId]
+    };
+    db.query(query)
+      .then(data => {
+        console.log('data from mapId', data.rows);
+      })
+      .catch(err => {
+        console.error("Error", err);
+      })
+  })
+
   return router;
 }
