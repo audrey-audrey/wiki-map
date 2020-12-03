@@ -1,14 +1,28 @@
 $(document).ready(function () {
 
+  let markers = [];
+
+  // helper function
+  /**
+   *
+   * @param {*} data = this is the array we get from the get request
+   */
+  const loopData = function (data) {
+    for(const coords of data) {
+      markers.push(coords)
+    }
+}
+
   const pathName = window.location.pathname;
   const mapId = pathName.substring(5)
   console.log('mapId', mapId )
 
   $.get("/new/" + mapId , function (data, status) {
-    console.log("hello", status)
+    loopData(data);
   })
 
-  let markers = [];
+  console.log('after get request', markers)
+
 
   let searchMarker = [];
   // console.log(markers);

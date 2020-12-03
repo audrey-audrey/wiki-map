@@ -77,7 +77,7 @@ module.exports = (db) => {
     };
     db.query(query)
       .then(data => {
-        console.log('data from mapId', data.rows);
+        res.send(data.rows);
       })
       .catch(err => {
         console.error("Error", err);
