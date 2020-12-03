@@ -17,7 +17,7 @@ module.exports = (db) => {
         .then(data => {
           console.log(data.rows[0].name)
           const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
-          res.render("new", { message: welcomeMessage });
+          res.render("new", { message: welcomeMessage, maps: data.rows});
         })
         .catch(error => {
           console.error('Error: ', error.message);
@@ -61,6 +61,27 @@ module.exports = (db) => {
           .then(() => { res.send('All good!') })
       })
   });
+
+
+  // Get request only for getting pins/markers info
+  router.get("/:id", (req, res) => {
+    const mapId = req.params.id;
+    const query = {
+      text: `
+      SELECT name, description, lat, lng, image
+      FROM pins
+      WHERE map_id = $1;
+      `,
+      values: [mapId]
+    };
+    db.query(query)
+      .then(data => {
+        res.send(data.rows);
+      })
+      .catch(err => {
+        console.error("Error", err);
+      })
+  })
 
   return router;
 }

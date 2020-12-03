@@ -44,7 +44,11 @@ const usersRoutes = require("./routes/users");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const newRoutes = require("./routes/new");
+<<<<<<< HEAD
 const profileRoutes = require("./routes/profile");
+=======
+const mapRoutes = require("./routes/map");
+>>>>>>> feature/addNewMapPage
 
 
 // Mount all resource routes
@@ -55,8 +59,12 @@ app.use("api/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/new", newRoutes(db));
+<<<<<<< HEAD
 app.use("/profile", profileRoutes(db));
 
+=======
+app.use("/", mapRoutes(db));
+>>>>>>> feature/addNewMapPage
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -74,15 +82,48 @@ app.get("/", (req, res) => {
     };
     db.query(query)
     .then(data => {
+<<<<<<< HEAD
       //console.log(data.rows[0].name)
       const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
       res.render("index", {message: welcomeMessage});
+=======
+      db.query(`SELECT maps.id, maps.name AS mapName, users.name AS userName
+      FROM maps
+      JOIN users ON owner_id = users.id
+      `)
+      .then((maps)=> {
+        console.log(data.rows[0].name)
+        console.log('maps.rows', maps.rows)
+        const welcomeMessage = `Welcome ${data.rows[0].name.split(' ')[0]}`
+        res.render("index", {message: welcomeMessage, maps: maps.rows});
+      })
+>>>>>>> feature/addNewMapPage
     })
-    .catch(error => {
-      console.error('Error: ', error.message);
+    .catch(err => {
+      console.error('Error: ', err);
     })
   } else {
-    res.render("index", {message: null});
+    const query = {
+      text: `
+        SELECT name
+        FROM users
+        WHERE id = $1
+      `,
+      values: [userId]
+    };
+    db.query(query)
+    .then(data => {
+      db.query(`SELECT maps.id, maps.name AS mapName, users.name AS userName
+      FROM maps
+      JOIN users ON owner_id = users.id
+      `)
+      .then((maps)=> {
+        res.render("index", {message: null, maps: maps.rows, user: null});
+      })
+    })
+    .catch(error => {
+      console.error('Error: ', err);
+    })
   }
 });
 
