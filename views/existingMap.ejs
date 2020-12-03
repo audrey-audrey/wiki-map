@@ -25,6 +25,7 @@
     <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
     <script src = "/scripts/existingMap.js"></script>
     <script src = "/scripts/edit.js"></script>
+    <script src = "/scripts/favourite.js"></script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0Hq0cdrwxC8iGqJ0WPmJGwVqh09VP8Ho&libraries=places&v=weekly"
     defer>
@@ -54,7 +55,7 @@
             <% if (!message) { %>
               <a href = "/login" class="btn btn-danger" > Log in to Make an Edit </a>
               <% } %>
-            <a href = "" class="btn btn-primary"> <i class="fas fa-star"></i> </a>
+            <a href = "" class="btn btn-primary" id = 'favButton' data-mapid = '<%= map.id %>' > <i class="fas fa-star"></i> </a>
           </div>
         </footer>
       </article>
@@ -77,7 +78,6 @@
         </tr>
       </thead>
       <tbody>
-        <% for(let map in maps) { %>
           <tr>
             <td><%= Number(map) + 1 %></td>
             <td><%= pinTitle %></td>
@@ -86,8 +86,6 @@
               <button type = "submit" class="btn btn-outline-danger" > Delete </button>
             </form></td>
           </tr>
-
-        <% } %>
       </tbody>
     </table>
 

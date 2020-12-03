@@ -79,10 +79,10 @@
         console.log("searchMarker: ", searchMarker);
       });
 
-      // Remove pin on double click
-      // marker.addListener("dblclick", function() {
-      //   marker.setMap(null);
-      // })
+    // Remove pin on double click
+    // marker.addListener("dblclick", function() {
+    //   marker.setMap(null);
+    // })
 
     });
 
@@ -100,12 +100,12 @@
         }, map);
         coordsArray = [];
         $(".table").append(`
-<tr>
-<th scope="row"> ${markers.length} </th>
-<td> ${$("#title").val()} </td>
-<td> ${$("#description").val()} </td>
-</tr>
-`);
+          <tr>
+          <th scope="row"> ${markers.length} </th>
+          <td> ${$("#title").val()} </td>
+          <td> ${$("#description").val()} </td>
+          </tr>
+        `);
         $("#pac-input").val("");
         $("#title").val("");
         $("#description").val("");
@@ -127,10 +127,10 @@
     })
 
     $(() => {
-      $("#pac-input").click(() => {
-        console.log('point clicked.  Not added.')
-        marker.setMap(null);
-      })
+    $("#pac-input").click(() => {
+      console.log('point clicked.  Not added.')
+      marker.setMap(null);
+    })
     });
 
     $(document).ready(() => {
@@ -150,10 +150,10 @@
   function addMarker(location, map) {
     let infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: {
-        lat: location.lat,
-        lng: location.lng
-      },
+    position: {
+      lat: location.lat,
+      lng: location.lng
+    },
       map: map,
       animation: google.maps.Animation.DROP
     });
@@ -184,7 +184,7 @@
         '<p id = "markerImage"> <img src = ' + location.image + '></p>',
       );
       infowindow.open(map, marker);
-    });
+      });
   }
 
   const escape = str => {
