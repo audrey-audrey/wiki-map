@@ -4,25 +4,101 @@
   <meta charset="utf-zz8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
+
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="/styles/profile.css" type="text/css"/>
+
+  <!-- External Font -->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg></script>
+
+  <!-- External JS -->
+  <script src = "/scripts/userprofile.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+
   <title> Midterm App - Login </title>
 </head>
 
 
 <body>
   <%- include('partials/_header') %>
-  <div class = "profilebody">
-    <h4 class="card-title" style = "margin-bottom: 30px"> Profile </h4>
-    <p>User: <%= name %></p>
-    <p>Email: <%= email %></p>
 
-    <div class="card-footer text-muted"></div>
+  <div class="container">
+    <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+            <!-- name -->
+						<%= name %>
+					</div>
+					<div class="profile-usertitle-job">
+						Developer
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- END SIDEBAR BUTTONS -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="usermenu">
+						<li class="active">
+            <!-- OVERVIEW -->
+							<a href="#" class="overview">
+                <i class="fas fa-smile"></i>
+							Overview </a>
+            </li>
 
+            <!-- FAVOURITES -->
+						<li>
+							<a href="#" class="favourites">
+                <i class="fas fa-star"></i>
+							Favourites </a>
+            </li>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <!-- CONTRIBUTIONS -->
+						<li>
+							<a href="#" class="contributions">
+                <i class="fas fa-globe-americas"></i>
+							Contributions </a>
+            </li>
+
+					</ul>
+				</div>
+				<!-- END MENU -->
+			</div>
+		</div>
+		<div class="col-md-9">
+            <div class="profile-content">
+              <div class="overview-content">
+                 <ul>
+                   <li>User ID: </li>
+                   <li>Name: <%= name %></li>
+                   <li>Email: </li>
+                 </ul>
+              </div>
+              <div class="favourites-content">
+                <h5>Favourite Maps</h5>
+                <ul class="favourites-content-list">
+                </ul>
+             </div>
+             <div class="contributions-content">
+              <h5>Contributions</h5>
+              <ul class="contributions-content-list">
+              </ul>
+           </div>
+            </div>
+		</div>
+	</div>
+</div>
+
 </body>
 </html>

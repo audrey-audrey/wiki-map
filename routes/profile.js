@@ -31,6 +31,42 @@ module.exports = (db) => {
     // }
   });
 
+  // get request for favourites map
+  router.get("/favourites", (req, res) => {
+    const userId = req.session.user_id;
+    const query = {
+      text: `
+        SELECT maps.name as name, maps.id as id
+        FROM maps
+        JOIN favourite_maps ON maps.id = map_id
+        WHERE favourite_maps.user_id = $1
+        ORDER BY name;
+      `,
+      values: [userId]
+    };
+
+    db.query(query)
+    .then(data => res.send(data.rows))
+  })
+
+  router.get("/contributions", (req, res) => {
+    const userId = req.session.user_id;
+    const query = {
+      text: `
+        SELECT maps.name as name, maps.id as id
+        FROM maps
+        JOIN pins ON maps.id = map_id
+        WHERE pins.user_id = $1
+        GROUP BY maps.name, maps.id
+        ORDER BY name;
+      `,
+      values: [userId]
+    };
+
+    db.query(query)
+    .then(data => res.send(data.rows))
+  })
+
   return router;
 };
 

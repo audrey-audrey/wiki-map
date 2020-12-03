@@ -8,7 +8,11 @@ module.exports = (db) => {
     if (userId) {
       const query = {
         text: `
+<<<<<<< HEAD
         SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description, pins.lat, pins.lng
+=======
+        SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description
+>>>>>>> feature/profile
         FROM maps
         JOIN users ON owner_id = users.id
         JOIN pins ON map_id = maps.id
@@ -23,11 +27,17 @@ module.exports = (db) => {
           message: `Welcome ${data.rows[0].username.split(' ')[0]}`,
           mapTitle: data.rows[0].mapname,
           pinTitle: data.rows[0].pinname,
+<<<<<<< HEAD
           pinDescription : data.rows[0].description,
           lat: data.rows[0].lat,
           lng: data.rows[0].lng
         }
         return res.render('existingMap', templateVars);
+=======
+          pinDescription : data.rows[0].description
+        }
+        return res.render('map', templateVars);
+>>>>>>> feature/profile
       })
       .catch(err => {
         console.error("Error", err);
@@ -75,7 +85,10 @@ module.exports = (db) => {
   //   })
   // })
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> feature/profile
   return router;
 }
