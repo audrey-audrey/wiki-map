@@ -2,7 +2,7 @@
 // create list elements to display favourite maps
 const createListElement = function (name) {
   let $name = `
-  <li><a href=/maps/${name.id}>${name.name}</a></li>
+  <li><a href=/map/${name.id}>${name.name}</a></li>
   `;
   return $name;
 }
