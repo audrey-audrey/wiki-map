@@ -15,6 +15,8 @@
   <!-- External Font -->
   <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg></script>
 
+  <!-- External JS -->
+  <script src = "/scripts/userprofile.js"></script>
   <!------ Include the above in your HEAD tag ---------->
 
   <title> Midterm App - Login </title>
@@ -36,7 +38,8 @@
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						Marcus Doe
+            <!-- name -->
+						<%= name %>
 					</div>
 					<div class="profile-usertitle-job">
 						Developer
@@ -53,45 +56,21 @@
                 <i class="fas fa-smile"></i>
 							Overview </a>
             </li>
-            <!-- Display profile on-click -->
-            <script>
-              $(document).ready(function() {
-                  $('.overview').click(function() {
-                      $(".profile-content").html("overview");
-                  })
 
-              })
-          </script>
             <!-- FAVOURITES -->
 						<li>
 							<a href="#" class="favourites">
                 <i class="fas fa-star"></i>
 							Favourites </a>
             </li>
-            <!-- Display favourites table -->
-            <script>
-              $(document).ready(function() {
-                  $('.favourites').click(function() {
-                      $(".profile-content").html("favourites");
-                  })
 
-              })
-          </script>
             <!-- CONTRIBUTIONS -->
 						<li>
 							<a href="#" class="contributions">
                 <i class="fas fa-globe-americas"></i>
 							Contributions </a>
             </li>
-            <!-- Display contribution on click -->
-            <script>
-              $(document).ready(function() {
-                  $('.contributions').click(function() {
-                      $(".profile-content").html("contributions");
-                  })
 
-              })
-          </script>
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -99,7 +78,27 @@
 		</div>
 		<div class="col-md-9">
             <div class="profile-content">
-			   Some user related content goes here...
+              <div class="overview-content">
+                 <ul>
+                   <li>a</li>
+                   <li>b</li>
+                   <li>c</li>
+                 </ul>
+              </div>
+              <div class="favourites-content">
+                <ul>
+                  <li>d</li>
+                  <li>e</li>
+                  <li>f</li>
+                </ul>
+             </div>
+             <div class="contributions-content">
+              <ul>
+                <li>g</li>
+                <li>h</li>
+                <li>i</li>
+              </ul>
+           </div>
             </div>
 		</div>
 	</div>

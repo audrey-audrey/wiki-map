@@ -125,4 +125,16 @@ nav {
   padding: 20px;
   background: #fff;
   min-height: 460px;
+
+  .overview-content {
+    display: block;
+  }
+
+  .favourites-content {
+    display: none;
+  }
+
+  .contributions-content {
+    display: none;
+  }
 }
