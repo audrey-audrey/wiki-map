@@ -38,6 +38,7 @@ $(document).ready(function () {
       $('.contributions-content').hide()
     }
 
+    $(".overview-content").show();
   })
 
   $('.favourites').click(function () {

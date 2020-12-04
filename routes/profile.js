@@ -10,7 +10,7 @@ module.exports = (db) => {
     }
     const query = {
       text: `
-        SELECT name, email
+        SELECT *
         FROM users
         WHERE id = $1;
       `,
@@ -18,10 +18,15 @@ module.exports = (db) => {
     };
     db.query(query)
     .then(data => {
-      const {name, email} = data.rows[0];
+      const {id, name, email, image} = data.rows[0];
       const message = `Welcome ${data.rows[0].name.split(' ')[0]}`;
       console.log(message);
-      res.render("profile", {name: name, email: email, message: message});
+      res.render("profile", {
+        id: id,
+        name: name,
+        email: email,
+        image: image,
+        message: message});
     })
     // const userId = req.session.user_id;
     // if (!userId || userId !== req.params.id) {

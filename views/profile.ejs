@@ -30,9 +30,9 @@
     <div class="row profile">
 		<div class="col-md-3">
 			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
+        <!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive" alt="">
+					<img src=<%=image%>/>
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -42,7 +42,7 @@
 						<%= name %>
 					</div>
 					<div class="profile-usertitle-job">
-						Developer
+						Web Developer
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -77,9 +77,11 @@
             <div class="profile-content">
               <div class="overview-content">
                  <ul>
-                   <li>User ID: </li>
+                   <li>User ID: <%= id %></li>
                    <li>Name: <%= name %></li>
-                   <li>Email: </li>
+                   <li>Email: <%= email %></li>
+                   <br>
+                   <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
                  </ul>
               </div>
               <div class="favourites-content">
