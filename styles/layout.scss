@@ -1,5 +1,5 @@
 // See: https://sass-lang.com/
-nav {
+.navHeader {
   height: 90px;
   display: flex;
   align-items: center;
@@ -7,14 +7,56 @@ nav {
   background-color: rgb(223, 174, 49);
   padding: 1.5em;
 
+  p {
+    font-size: larger;
+  }
+
   h3 {
     margin-left: 1em;
     font-size: 25px;
   }
 
+  .homelink {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
   .homelink:hover{
     text-decoration: none;
   }
+
+  // Earth animation
+  .earth {
+    width:50px;
+    height:50px;
+    background-image:url( https://raw.githubusercontent.com/cartalan/TierraGirando/master/img/mapa.png);
+    background-size:cover;
+    border-radius:50px;
+    margin:auto;
+    box-shadow:-8px -5px 0 0 rgba(0,0,0,.15) inset, -22px -8px 0 0 rgba(0,0,0,.1) inset, 2px 2px 0 0 rgba(255,255,255,.2) inset;
+    -webkit-animation:rotationEarth 15s infinite linear;
+    -moz-animation:rotationEarth 15s infinite linear;
+    animation:rotationEarth 15s infinite linear;
+}
+
+@-webkit-keyframes rotationEarth {
+   from {
+       background-position:left center;
+   }
+   to {
+       background-position: -396px center;
+   }
+}
+
+@keyframes rotationEarth {
+   from {
+       background-position:left center;
+   }
+   to {
+       background-position: -396px center;
+   }
+}
 
   .reglogin-btn{
     display: flex;
