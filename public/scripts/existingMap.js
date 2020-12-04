@@ -79,6 +79,9 @@ $(document).ready(function () {
             map.addListener('click', function(){
               infowindow.close(map, pin); // Close previously opened infowindow
               $('#editPoint').html("Add Point").attr("id", "addPoint");
+              $("#title").val("");
+              $("#description").val("");
+              $("#image").val("");
             })
           }
       }
