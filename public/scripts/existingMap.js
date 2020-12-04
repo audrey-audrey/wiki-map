@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
   // helper function
   /**
    *
@@ -35,6 +37,11 @@ $(document).ready(function () {
 
     function initMap() {
       // map options
+
+      $(".favourites").css({
+        "display": "none"
+      })
+
       const options = {
         zoom: 14,
         center: { lat: 43.6532, lng: -79.3832 }
