@@ -170,6 +170,8 @@ body {
       width: 130px;
       margin-top: 30px;
     }
+
+
   }
 
   .error-message {
@@ -336,4 +338,16 @@ img {
   margin-bottom: 1.25rem;
 }
 
+#editVisibleTable{
+  color: black;
+}
+
+#deleteMarker{
+  color: white;
+}
+
+#deleteMarker:hover{
+  color: red;
+  background-color: white;
+}
 
