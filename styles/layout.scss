@@ -8,10 +8,12 @@
   padding: 1.5em;
 
   p {
+    color: #343a40;
     font-size: larger;
   }
 
   h3 {
+    color: #343a40;
     margin-left: 1em;
     font-size: 25px;
   }
@@ -57,10 +59,6 @@
        background-position: -396px center;
    }
 }
-
-// .card {
-//   margin: 1em;
-// }
 
   .reglogin-btn{
     display: flex;
@@ -203,11 +201,14 @@ img {
   vertical-align: middle;
 }
 .btn {
+  padding: 0.5rem;
+  text-transform: lowercase;
+}
+
+.viewedit {
   background-color: white;
   border: 1px solid #cccccc;
   color: #696969;
-  padding: 0.5rem;
-  text-transform: lowercase;
 }
 .btn--block {
   display: block;

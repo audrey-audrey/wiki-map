@@ -25,10 +25,10 @@
     <script src="https://kit.fontawesome.com/2f9fa96ce3.js" crossorigin="anonymous"></script>
     <script src = "/scripts/map.js"></script>
     <script src = "/scripts/edit.js"></script>
-    <script
+    <!-- <script
     src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
     defer>
-    </script>
+    </script> -->
 
   </head>
 
@@ -45,7 +45,7 @@
             <div class="card__content">
               <div class="card__title"><%= map.mapname %></div>
               <p class="card__text">Author: <%= map.username %></p>
-              <a href="/map/<%=map.id%>" class="btn btn-primary"> View/Edit </a>
+              <a href="/map/<%=map.id%>" class="btn btn-primary viewedit"> View/Edit </a>
             </div>
           </div>
         </li>

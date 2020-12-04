@@ -6,6 +6,7 @@ Licensed under MIT
 
 body {
   background: #F1F3FA;
+  color: #343a40;
 }
 
 .col-md-3 {
@@ -13,6 +14,7 @@ body {
 }
 /* Profile container */
 .profile {
+  color: #343a40;
   margin: 20px 0;
   .profile-userpic{
     display: flex;
@@ -115,7 +117,7 @@ ul {
 .profile-content {
   padding: 20px;
   background: #fff;
-  min-height: 460px;
+  min-height: 505px;
 
   .overview-content {
     display: block;
