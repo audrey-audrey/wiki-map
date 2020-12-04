@@ -48,6 +48,7 @@ const profileRoutes = require("./routes/profile");
 const mapRoutes = require("./routes/map");
 const favouriteRoutes = require("./routes/favourite");
 const deleteRoutes= require("./routes/delete");
+const editRoutes= require("./routes/edit");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -61,6 +62,7 @@ app.use("/profile", profileRoutes(db));
 app.use("/", mapRoutes(db));
 app.use("/", favouriteRoutes(db));
 app.use("/", deleteRoutes(db));
+app.use("/", editRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!

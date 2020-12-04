@@ -21,7 +21,7 @@ module.exports = (db) => {
     if (userId) {
       const query = {
         text: `
-        SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description, pins.lat, pins.lng
+        SELECT maps.id, maps.name AS mapName, users.name AS userName, pins.name as pinName, pins.description, pins.lat, pins.lng, pins.image
         FROM maps
         JOIN users ON owner_id = users.id
         JOIN pins ON map_id = maps.id
@@ -39,6 +39,7 @@ module.exports = (db) => {
           mapTitle: data.rows[0].mapname,
           pinTitle: data.rows[0].pinname,
           pinDescription : data.rows[0].description,
+          pinImage: data.rows[0].image,
           lat: data.rows[0].lat,
           lng: data.rows[0].lng
         }

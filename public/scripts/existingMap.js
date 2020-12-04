@@ -63,17 +63,22 @@ $(document).ready(function () {
           }
 
           if(props.description) {
+            const image = props.image ? props.image : "";
             pin.addListener('click', function(){
-              infowindow.close(); // Close previously opened infowindow
+              infowindow.close(map, pin); // Close previously opened infowindow
               infowindow.setContent(
                 '<h4>' + props.name + '</h4>' +
                 '<p>' + props.description + '</p>' +
-                '<p id = "markerImage"> <img src = ' + props.image + '></p>',
+                '<p id = "markerImage"> <img src = "' + image + '" alt = "No image available"/></p>',
               );
               infowindow.open(map, pin);
               $("#title").val(props.name);
               $("#description").val(props.description);
-              $("#image").val(props.image);
+              $('#addPoint').html("Edit Point").attr("id", "editPoint");
+            })
+            map.addListener('click', function(){
+              infowindow.close(map, pin); // Close previously opened infowindow
+              $('#editPoint').html("Add Point").attr("id", "addPoint");
             })
           }
       }
@@ -125,6 +130,7 @@ $(document).ready(function () {
         coordsArray.push(place.geometry.location.lat());
         coordsArray.push(place.geometry.location.lng());
 
+
         let marker = new google.maps.Marker({ map: map });
         if (!place.place_id) {
           return;
@@ -158,30 +164,53 @@ $(document).ready(function () {
 
       // Adding pins to map
       $(() => {
-        $("#addPoint").click(() => {
-          console.log('addpoint button clicked')
-          addMarker({
-            lat: coordsArray[0],
-            lng: coordsArray[1],
-            mapTitle: escape($("#mapTitle").val()),
-            title: escape($("#title").val()),
-            description: escape($("#description").val()),
-            image: escape($("#image").val())
-          }, map);
-          coordsArray = [];
-          $(".table").append(`
-            <tr>
-            <th scope="row"> ${$("table tr").length} </th>
-            <td> ${$("#title").val()} </td>
-            <td> ${$("#description").val()} </td>
-            <td> <a class="btn btn-danger" id= "deleteMarker" data-mapid = "<%= map.id %>" data-marker = "<%= map.pinname %>"> Delete </a> </td>
-            </tr>
-          `);
-          $("#pac-input").val("");
-          $("#title").val("");
-          $("#description").val("");
-          $("#image").val("");
+
+        $("#addPoint").click((event) => {
+          if (event.currentTarget.attributes.id.value === 'addPoint') {
+            console.log(event.currentTarget.attributes.id.value);
+            console.log('addpoint button clicked')
+            addMarker({
+              lat: coordsArray[0],
+              lng: coordsArray[1],
+              mapTitle: escape($("#mapTitle").val()),
+              title: escape($("#title").val()),
+              description: escape($("#description").val()),
+              image: escape($("#image").val())
+            }, map);
+            coordsArray = [];
+            $(".table").append(`
+              <tr>
+              <th scope="row"> ${$("table tr").length} </th>
+              <td> ${$("#title").val()} </td>
+              <td> ${$("#description").val()} </td>
+              <td> <a class="btn btn-danger" id= "deleteMarker" data-mapid = "<%= map.id %>" data-marker = "<%= map.pinname %>"> Delete </a> </td>
+              </tr>
+            `);
+            $("#pac-input").val("");
+            $("#title").val("");
+            $("#description").val("");
+            $("#image").val("");
+          } else {
+              event.preventDefault();
+              const mapID = $("#mapTitle").data("mapid");
+              const mapTitle = $("#mapTitle").data("maptitle");
+              const pinTitle = $("#title").data("pintitle");
+              const pinDescription = $("#description").data("pindescription");
+              const pinImage = $("#image").data("pinimage");
+              console.log(mapID, mapTitle, pinTitle, pinDescription, pinImage )
+              $.ajax({
+                url: `/edit/${mapID}/${mapTitle}/${pinTitle}/${pinDescription}/${pinImage}`,
+                method: "POST",
+              })
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err => {
+                console.log(err);
+              })
+            }
         })
+
 
         // Sending map and markers array to the database
         $("#createMap").click(() => {
@@ -258,6 +287,7 @@ $(document).ready(function () {
         infowindow.open(map, marker);
         $("#title").val(location.title);
         $("#description").val(location.description);
+        $('#addPoint').val("Edit Point");
       });
     }
 

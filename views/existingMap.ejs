@@ -60,12 +60,12 @@
         </footer>
       </article>
       <form class = "pinDescription" id = "editVisible" >
-        <input name = "mapTitle" id = "mapTitle" placeholder = "Map Title" value = "<%= mapTitle %>"/>
+        <input name = "mapTitle" id = "mapTitle" placeholder = "Map Title" value = "<%= mapTitle %>" data-mapid = "<%= map.id %>" data-maptitle = "<%= mapTitle %>"/>
         <input id="pac-input" class="controls"  placeholder="Search for locations!">
-        <input name = "title" id = "title" />
-        <textarea name = "text" id = "description" ></textarea>
-        <input name = "image" id = "image" placeholder = "image url" />
-            <a class="btn btn-success" id = "addPoint"> Add Point </a>
+        <input name = "title" id = "title" data-pintitle = "<%= pinTitle %>"/>
+        <textarea name = "text" id = "description" data-pindescription = <%= pinDescription%>"></textarea>
+        <input name = "image" id = "image" placeholder = "image url" data-pinimage = "<%= pinImage%>"/>
+        <a class="btn btn-success" id = "addPoint"> Add Point </a>
         <a class="btn btn-success" id= "createMap"> Update Map! </a>
       </form>
     </main>
