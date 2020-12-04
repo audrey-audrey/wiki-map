@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
     };
     db.query(query)
     .then(data => {
-      db.query(`SELECT maps.id, maps.name AS mapName, users.name AS userName
+      db.query(`SELECT maps.id, maps.name AS mapName, maps.image, users.name AS userName
       FROM maps
       JOIN users ON owner_id = users.id
       `)
@@ -103,7 +103,7 @@ app.get("/", (req, res) => {
     };
     db.query(query)
     .then(data => {
-      db.query(`SELECT maps.id, maps.name AS mapName, users.name AS userName
+      db.query(`SELECT maps.id, maps.name AS mapName, maps.image, users.name AS userName
       FROM maps
       JOIN users ON owner_id = users.id
       `)

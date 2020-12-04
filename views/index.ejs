@@ -36,16 +36,22 @@
     <!-- Page-specific (main) content here -->
     <%- include('partials/_header') %>
     <main class="container">
-      <% for(let map of maps) { %>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="<%= map.image %>" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">  <%= map.mapname %> </h5>
-          <p class="card-text"> Author: <%= map.username %> </p>
-          <a href="/map/<%=map.id%>" class="btn btn-primary"> View/Edit </a>
-        </div>
-      </div>
-      <% } %>
+      <ul class="cards">
+        <% for(let map of maps) { %>
+        <li class="cards__item">
+          <div class="card">
+            <img src="<%=map.image%>"/>
+            <!-- <img src='https://unsplash.it/800/600?image=12'/> -->
+            <div class="card__content">
+              <div class="card__title"><%= map.mapname %></div>
+              <p class="card__text">Author: <%= map.username %></p>
+              <a href="/map/<%=map.id%>" class="btn btn-primary"> View/Edit </a>
+            </div>
+          </div>
+        </li>
+        <% } %>
+      </ul>
     </main>
-  </body>
-</html>
+    </body>
+
+    </html>

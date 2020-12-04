@@ -8,6 +8,6 @@ CREATE TABLE maps(
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255),
-  image VARCHAR(255),
+  image TEXT,
   date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
