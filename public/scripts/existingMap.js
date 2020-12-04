@@ -38,7 +38,7 @@ $(document).ready(function () {
     function initMap() {
       // map options
 
-      $(".favourites").css({
+      $(".favouriteMesage").css({
         "display": "none"
       })
 

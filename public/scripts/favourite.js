@@ -12,6 +12,6 @@ $(() => {
     .catch(err => {
       console.log(err);
     })
-    $(".favourites").slideDown(1300).delay(1000).slideUp(1300)
+    $(".favouriteMesage").slideDown(1300).delay(1000).slideUp(1300)
   })
 })
