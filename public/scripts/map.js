@@ -100,12 +100,13 @@
         }, map);
         coordsArray = [];
         $(".table").append(`
-<tr>
-<th scope="row"> ${markers.length} </th>
-<td> ${$("#title").val()} </td>
-<td> ${$("#description").val()} </td>
-</tr>
-`);
+          <tr>
+          <th scope="row">  </th>
+          <td> ${$("#title").val()} </td>
+          <td> ${$("#description").val()} </td>
+          <td> <a class="btn btn-danger" id= "deleteMarker" data-mapid = "<%= map.id %>" data-marker = "<%= map.pinname %>"> Delete </a> </td>
+          </tr>
+          `);
         $("#pac-input").val("");
         $("#title").val("");
         $("#description").val("");

@@ -63,12 +63,17 @@ $(document).ready(function () {
           }
 
           if(props.description) {
-            const infoPopUp = new google.maps.InfoWindow({
-              content: props.description
-            });
-
             pin.addListener('click', function(){
-              infoPopUp.open(map, pin)
+              infowindow.close(); // Close previously opened infowindow
+              infowindow.setContent(
+                '<h4>' + props.name + '</h4>' +
+                '<p>' + props.description + '</p>' +
+                '<p id = "markerImage"> <img src = ' + props.image + '></p>',
+              );
+              infowindow.open(map, pin);
+              $("#title").val(props.name);
+              $("#description").val(props.description);
+              $("#image").val(props.image);
             })
           }
       }
@@ -165,12 +170,13 @@ $(document).ready(function () {
           }, map);
           coordsArray = [];
           $(".table").append(`
-  <tr>
-  <th scope="row"> ${markers.length} </th>
-  <td> ${$("#title").val()} </td>
-  <td> ${$("#description").val()} </td>
-  </tr>
-  `);
+            <tr>
+            <th scope="row"> ${$("table tr").length} </th>
+            <td> ${$("#title").val()} </td>
+            <td> ${$("#description").val()} </td>
+            <td> <a class="btn btn-danger" id= "deleteMarker" data-mapid = "<%= map.id %>" data-marker = "<%= map.pinname %>"> Delete </a> </td>
+            </tr>
+          `);
           $("#pac-input").val("");
           $("#title").val("");
           $("#description").val("");
@@ -188,15 +194,16 @@ $(document).ready(function () {
             function (data, status) {
               console.log(data)
             });
+            window.location.replace("http://localhost:8080/");
         })
       })
 
-      $(() => {
-        $("#pac-input").click(() => {
-          console.log('point clicked.  Not added.')
-          marker.setMap(null);
-        })
-      });
+      // $(() => {
+      //   $("#pac-input").click(() => {
+      //     console.log('point clicked.  Not added.')
+      //     marker.setMap(null);
+      //   })
+      // });
 
       $(document).ready(() => {
         console.log('made it before');
@@ -249,6 +256,8 @@ $(document).ready(function () {
           '<p id = "markerImage"> <img src = ' + location.image + '></p>',
         );
         infowindow.open(map, marker);
+        $("#title").val(location.title);
+        $("#description").val(location.description);
       });
     }
 

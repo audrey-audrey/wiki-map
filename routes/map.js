@@ -32,6 +32,7 @@ module.exports = (db) => {
       .then(data => {
         console.log('data', data);
         const templateVars = {
+          count: data.rows,
           map: data.rows[0],
           message: `Welcome ${name.split(' ')[0]}`,
           mapid: data.rows[0].id,
@@ -69,27 +70,6 @@ module.exports = (db) => {
       })
     }
   })
-
-
-  // router.get("/maps", (req,res) => {
-  //   console.log('we hit the ned point')
-  //   const query = {
-  //     text: `
-  //     SELECT *
-  //     FROM maps
-  //     `
-  //   };
-  //   db.query(query)
-  //   .then(data => {
-  //     console.log('data', data);
-  //     res.json(data.rows)
-  //   })
-  //   .catch(err => {
-  //     console.error("Error", err);
-  //   })
-  // })
-
-
 
   return router;
 }
