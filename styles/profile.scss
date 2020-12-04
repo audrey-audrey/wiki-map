@@ -6,38 +6,24 @@ Licensed under MIT
 
 body {
   background: #F1F3FA;
+  color: #343a40;
 }
 
-// I need to add this nav bar??
-nav {
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgb(223, 174, 49);
-  padding: 1.5em;
-
-  h3 {
-    margin-left: 1em;
-    font-size: 25px;
-  }
-
-  .homelink:hover{
-    text-decoration: none;
-  }
-
-  .reglogin-btn{
-    margin-right: 1em;
-  }
-}
 .col-md-3 {
   width: 25 vw;
 }
 /* Profile container */
 .profile {
+  color: #343a40;
   margin: 20px 0;
+  .profile-userpic{
+    display: flex;
+  }
 }
 
+ul {
+  list-style-type: none;
+}
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px 0 10px 0;
@@ -47,11 +33,11 @@ nav {
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  width: 100px;
+  width: 200px;
   height: auto;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
+  // -webkit-border-radius: 50% !important;
+  // -moz-border-radius: 50% !important;
+  // border-radius: 50% !important;
 }
 
 .profile-usertitle {
@@ -79,7 +65,14 @@ nav {
 }
 
 .usermenu {
+  margin:0.5em;
+  padding:0;
   list-style-type: none;
+
+  .list-group-item{
+    margin-top:0.25em;
+    margin-bottom: 0.25em;
+  }
 }
 
 .profile-usermenu ul li {
@@ -124,7 +117,7 @@ nav {
 .profile-content {
   padding: 20px;
   background: #fff;
-  min-height: 460px;
+  min-height: 505px;
 
   .overview-content {
     display: block;

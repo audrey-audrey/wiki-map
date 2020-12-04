@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
 
-  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <link rel="stylesheet" href="/styles/profile.css" type="text/css"/>
 
@@ -30,9 +30,9 @@
     <div class="row profile">
 		<div class="col-md-3">
 			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
+        <!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive" alt="">
+					<img src=<%=image%>/>
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -42,7 +42,7 @@
 						<%= name %>
 					</div>
 					<div class="profile-usertitle-job">
-						Developer
+						Web Developer
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -50,26 +50,23 @@
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="usermenu">
-						<li class="active">
             <!-- OVERVIEW -->
-							<a href="#" class="overview">
-                <i class="fas fa-smile"></i>
-							Overview </a>
-            </li>
+            <li class="list-group-item" class="active">
+              <a href="#" class="overview">
+              <i class="fas fa-smile"></i>
+            <b>OVERVIEW</b> </a></li>
 
             <!-- FAVOURITES -->
-						<li>
-							<a href="#" class="favourites">
+            <li class="list-group-item" class="active">
+              <a href="#" class="favourites">
                 <i class="fas fa-star"></i>
-							Favourites </a>
-            </li>
+							<b>FAVOURITES</b> </a></li>
 
             <!-- CONTRIBUTIONS -->
-						<li>
-							<a href="#" class="contributions">
+            <li class="list-group-item" class="active">
+              <a href="#" class="contributions">
                 <i class="fas fa-globe-americas"></i>
-							Contributions </a>
-            </li>
+							<b>CONTRIBUTIONS</b> </a></li>
 
 					</ul>
 				</div>
@@ -80,9 +77,11 @@
             <div class="profile-content">
               <div class="overview-content">
                  <ul>
-                   <li>User ID: </li>
+                   <li>User ID: <%= id %></li>
                    <li>Name: <%= name %></li>
-                   <li>Email: </li>
+                   <li>Email: <%= email %></li>
+                   <br>
+                   <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
                  </ul>
               </div>
               <div class="favourites-content">
